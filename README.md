@@ -1,8 +1,11 @@
 # TFM
 Proyecto fin de máster.
 
-## Apuntes del Curso de Python (Python Course Notes)
+## Estructura del Repositorio
 
+El repositorio está organizado en las siguientes secciones:
+
+### 1. Apuntes del Curso de Python
 En el directorio [Curso Python](./Curso%20Python) se encuentran los apuntes y materiales de estudio sobre el lenguaje de programación Python:
 
 * **[Introducción a Python](./Curso%20Python/Introducción.md)**: Introducción al lenguaje, ejecución del intérprete interactivo, módulos, funciones definidas por el usuario, reglas de sangría y herramientas de ayuda integrada (`help()` y `dir()`).
@@ -12,3 +15,12 @@ En el directorio [Curso Python](./Curso%20Python) se encuentran los apuntes y ma
 * **[Diccionarios y Archivos en Python](./Curso%20Python/Diccionarios_Archivos.md)**: Uso de diccionarios (tablas hash `dict`), formateo con diccionarios, operador `del`, manejo de lectura y escritura de archivos (incluso en Unicode), y consejos para desarrollo incremental.
 * **[Expresiones Regulares en Python](./Curso%20Python/ExpresionesRegulares.md)**: Introducción al módulo `re`, patrones básicos, metacaracteres, repeticiones codiciosas y no codiciosas, extracción de grupos con `search()` y `findall()`, y sustituciones con `sub()`.
 * **[Utilidades en Python](./Curso%20Python/Utilidades.md)**: Uso de módulos estándar como `os` y `shutil` para interactuar con el sistema de archivos, ejecución de procesos externos con `subprocess`, manejo básico de excepciones (`try/except`) y consultas HTTP con `urllib.request`.
+
+### 2. Prompts
+En el directorio [Prompts](./Prompts) se almacenan las plantillas e instrucciones de prompts utilizadas para guiar a los modelos de lenguaje:
+* **[Prompt #2](./Prompts/Pormpt%232.md)**: Especificación de prompt para la generación estructurada de preguntas de examen en formato JSON (metadatos, temas, dificultad y justificaciones).
+
+### 3. Exámenes / Tests
+En el directorio [Tests](./Tests) se guardan los exámenes y cuestionarios autogenerados:
+* **[Cadenas #1 - Gemini](./Tests/Cadenas_%231_Gemini.md)**: Examen de 10 preguntas de opción múltiple generado por el modelo Gemini basado en el capítulo de Cadenas de Python.
+* **[Cadenas #1 - GPT](./Tests/Cadenas_%231_GPT.md)**: Examen de 10 preguntas de opción múltiple generado por el modelo GPT basado en el capítulo de Cadenas de Python.
