@@ -19,8 +19,13 @@ En el directorio [Curso Python](./Curso%20Python) se encuentran los apuntes y ma
 ### 2. Prompts
 En el directorio [Prompts](./Prompts) se almacenan las plantillas e instrucciones de prompts utilizadas para guiar a los modelos de lenguaje:
 * **[Prompt #2](./Prompts/Pormpt%232.md)**: Especificación de prompt para la generación estructurada de preguntas de examen en formato JSON (metadatos, temas, dificultad y justificaciones).
+* **[Prompt #3](./Prompts/Pormpt%233.md)**: Instrucciones detalladas de generación de exámenes basadas en el protocolo de fidelidad al contexto, representatividad y ajuste psicométrico, con 3 opciones de respuesta.
+* **[Prompt #4](./Prompts/Pormpt%234.md)**: Extensión del Prompt #3 que incorpora la aleatorización de la respuesta correcta mediante el método de puntos de corte y la prioridad de 3 opciones de respuesta.
+* **[Prompt #5](./Prompts/Prompt%235.md)**: Plantilla adaptada para la generación de exámenes estructurados en JSON, con directrices para materias de ciencias/programación y humanidades, y clasificación por dificultad basada en la taxonomía de Bloom.
+* **[Prompt #6](./Prompts/Pormpt%236.md)**: Prompt avanzado en formato JSON que incluye cobertura temática equilibrada, evitación de redundancias, validación técnica de código/fórmulas y auditoría detallada de distractores.
 
 ### 3. Exámenes / Tests
 En el directorio [Tests](./Tests) se guardan los exámenes y cuestionarios autogenerados:
 * **[Cadenas #1 - Gemini](./Tests/Cadenas_%231_Gemini.md)**: Examen de 10 preguntas de opción múltiple generado por el modelo Gemini basado en el capítulo de Cadenas de Python.
 * **[Cadenas #1 - GPT](./Tests/Cadenas_%231_GPT.md)**: Examen de 10 preguntas de opción múltiple generado por el modelo GPT basado en el capítulo de Cadenas de Python.
+* **[Diccionarios y Archivos #5 - Gemini](./Tests/Diccionarios_Archivos%235_Gemini.md)**: Cuestionario de 10 preguntas de opción múltiple en formato JSON generado por el modelo Gemini basado en el capítulo de Diccionarios y Archivos de Python.
