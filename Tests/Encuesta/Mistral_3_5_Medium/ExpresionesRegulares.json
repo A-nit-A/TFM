@@ -1,0 +1,192 @@
+{
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python 3",
+    "fuente": "Documento proporcionado: ExpresionesRegulares.md",
+    "distribucion_tematica": [
+      {"tema": "Fundamentos de re (search, patrones básicos y cadenas crudas)", "peso": 20, "num_preguntas": 1},
+      {"tema": "Patrones de repetición (+, *, ?) y comportamiento codicioso", "peso": 20, "num_preguntas": 1},
+      {"tema": "Grupos de captura y extracción de subpatrones", "peso": 20, "num_preguntas": 1},
+      {"tema": "Función findall() y procesamiento de múltiples coincidencias", "peso": 20, "num_preguntas": 1},
+      {"tema": "Opciones/flags (IGNORECASE, DOTALL, MULTILINE)", "peso": 20, "num_preguntas": 1}
+    ],
+    "distribucion_respuestas": {
+      "a": 2,
+      "b": 2,
+      "c": 1
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "re.search() y patrones básicos con \\w",
+      "fragmento_origen": "Sección 'Ejemplos Básicos', ejemplo con patrón 'word:\\w\\w\\w' y cadena 'an example word:cat!!'",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "¿Qué imprime el siguiente código?\n```python\nimport re\nmatch = re.search(r'word:\\w\\w\\w', 'an example word\:cat!!')\nif match:\n    print('found', match.group())\nelse:\n    print('did not find')\n```",
+      "opciones": {
+        "a": "found word:cat",
+        "b": "found cat",
+        "c": "did not find"
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "El método re.search(pat, str) busca el patrón dentro de la cadena. Si tiene éxito, search() devuelve un objeto de coincidencia (match) y match.group() es el texto coincidente.",
+          "seccion": "Ejemplos Básicos"
+        },
+        "razon_respuesta_correcta": "El patrón r'word:\\w\\w\\w' coincide exactamente con 'word:cat' en la cadena. \\w coincide con un carácter de palabra (letra, dígito o guion bajo), por lo que \\w\\w\\w coincide con 'cat'. match.group() devuelve todo el texto coincidente, que es 'word:cat'.",
+        "concepto_principal": "Funcionamiento de re.search() y el metacarácter \\w para caracteres de palabra",
+        "error_comun_evaluado": "Confundir match.group() con el grupo capturado (cuando hay paréntesis) o asumir que el patrón solo coincide con parte del texto",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error de alcance de coincidencia",
+            "explicacion": "Asume que match.group() solo devuelve la parte variable del patrón (los \\w\\w\\w), ignorando que incluye todo el texto coincidente ('word:cat')."
+          },
+          "c": {
+            "tipo_error": "Error de sintaxis de patrón",
+            "explicacion": "Cree que el patrón no coincide porque no tiene en cuenta el 'word:' literal o malinterpreta el funcionamiento de \\w."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Repetición con + y comportamiento codicioso",
+      "fragmento_origen": "Sección 'Ejemplos de Repetición', ejemplo con patrón r'pi+' y cadena 'piiig'",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "¿Qué devuelve `match.group()` tras ejecutar el siguiente código?\n```python\nimport re\nmatch = re.search(r'pi+', 'piiig')\n```",
+      "opciones": {
+        "a": "'pi'",
+        "b": "'piii'",
+        "c": "'piiig'"
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "El operador + significa '1 o más ocurrencias del patrón a su izquierda'. La búsqueda avanza de izquierda a derecha y + es codicioso (greedy), es decir, consume la mayor cantidad posible de la cadena.",
+          "seccion": "Repetición y Ejemplos de Repetición"
+        },
+        "razon_respuesta_correcta": "El patrón r'pi+' coincide con 'p' seguido de una o más 'i's. En 'piiig', el + codicioso consume las tres 'i's consecutivas (ya que son todas 'i's), pero se detiene antes de la 'g' (que no es 'i'). Por lo tanto, el texto coincidente es 'piii'.",
+        "concepto_principal": "Comportamiento codicioso del operador + en expresiones regulares",
+        "error_comun_evaluado": "No considerar el comportamiento codicioso (greedy) de + y asumir que coincide solo con el mínimo posible",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error de codicia",
+            "explicacion": "Asume que + coincide con el mínimo posible (1 'i'), ignorando que es codicioso y consume todas las 'i's consecutivas."
+          },
+          "c": {
+            "tipo_error": "Error de límite",
+            "explicacion": "Incluye incorrectamente la 'g' final, asumiendo que + puede coincidir con cualquier carácter (confundiendo + con .*)."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Grupos de captura y extracción con paréntesis",
+      "fragmento_origen": "Sección 'Extracción de Grupos', ejemplo con patrón r'([\\w.-]+)@([\\w.-]+)' y cadena 'purple alice-b@google.com monkey dishwasher'",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "¿Qué imprime el siguiente código?\n```python\nimport re\ns = 'purple alice-b@google.com monkey dishwasher'\nmatch = re.search(r'([\\w.-]+)@([\\w.-]+)', s)\nif match:\n    print(match.group(2))\n```",
+      "opciones": {
+        "a": "alice-b@google.com",
+        "b": "alice-b",
+        "c": "google.com"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "Los paréntesis ( ) en el patrón establecen grupos lógicos. match.group(1) es el texto del primer grupo, match.group(2) el del segundo, etc. match.group() sin argumentos devuelve todo el texto coincidente.",
+          "seccion": "Extracción de Grupos"
+        },
+        "razon_respuesta_correcta": "El patrón r'([\\w.-]+)@([\\w.-]+)' tiene dos grupos: el primero ([\w.-]+) captura 'alice-b' (antes del @), y el segundo ([\w.-]+) captura 'google.com' (después del @). match.group(2) devuelve el segundo grupo, es decir, 'google.com'.",
+        "concepto_principal": "Extracción de subpatrones mediante grupos de captura con paréntesis",
+        "error_comun_evaluado": "Confundir el índice de los grupos (empezando en 1) con el índice de la cadena o asumir que group(2) devuelve todo el match",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error de índice de grupo",
+            "explicacion": "Asume que group(2) devuelve todo el texto coincidente (como group() sin argumentos), en lugar del segundo grupo capturado."
+          },
+          "b": {
+            "tipo_error": "Error de índice de grupo",
+            "explicacion": "Confunde group(2) con group(1), que sí devolvería 'alice-b'."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Función findall() para múltiples coincidencias",
+      "fragmento_origen": "Sección 'findall', ejemplo con patrón r'[\\w\\.-]+@[\\w\\.-]+' y cadena con múltiples emails",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "¿Qué devuelve `re.findall(r'\\d+', 'abc123def456ghi789')`?",
+      "opciones": {
+        "a": "['123', '456', '789']",
+        "b": "['123456789']",
+        "c": "['1', '2', '3', '4', '5', '6', '7', '8', '9']"
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "findall() encuentra todas las coincidencias del patrón en la cadena y las devuelve como una lista de cadenas. El patrón \\d+ coincide con una o más cifras consecutivas.",
+          "seccion": "findall"
+        },
+        "razon_respuesta_correcta": "El patrón r'\\d+' coincide con secuencias de una o más cifras. En 'abc123def456ghi789', hay tres secuencias de cifras: '123', '456' y '789'. findall() devuelve una lista con estas tres coincidencias.",
+        "concepto_principal": "Comportamiento de findall() para encontrar todas las coincidencias de un patrón",
+        "error_comun_evaluado": "Confundir el comportamiento codicioso de + (que ya agrupa cifras consecutivas) con coincidencias de un solo dígito",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error de comprensión de findall",
+            "explicacion": "Asume que findall() concatena todas las coincidencias en una sola cadena, en lugar de devolver una lista de coincidencias individuales."
+          },
+          "c": {
+            "tipo_error": "Error de patrón",
+            "explicacion": "Interpreta \\d+ como \\d (un solo dígito) y asume que findall() devuelve cada dígito individualmente."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Opciones/flags (IGNORECASE)",
+      "fragmento_origen": "Sección 'Opciones', descripción de re.IGNORECASE",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "¿Qué imprime el siguiente código?\n```python\nimport re\nmatch = re.search(r'[A-Z]+', 'Hello World', re.IGNORECASE)\nif match:\n    print(match.group())\n```",
+      "opciones": {
+        "a": "H",
+        "b": "Hello",
+        "c": "Hello World"
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "La bandera re.IGNORECASE hace que la coincidencia ignore las diferencias entre mayúsculas y minúsculas. El patrón [A-Z]+ coincide con una o más letras mayúsculas, pero con IGNORECASE, también coincide con minúsculas.",
+          "seccion": "Opciones"
+        },
+        "razon_respuesta_correcta": "Con re.IGNORECASE, el patrón [A-Z]+ coincide con cualquier letra (mayúscula o minúscula). En 'Hello World', la primera secuencia de letras es 'Hello' (H, e, l, l, o). El + codicioso consume todas las letras consecutivas, por lo que match.group() devuelve 'Hello'.",
+        "concepto_principal": "Efecto de la flag re.IGNORECASE en la coincidencia de patrones",
+        "error_comun_evaluado": "Asumir que IGNORECASE solo afecta a mayúsculas o no considerar que el patrón coincide con la secuencia más larga posible",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error de codicia",
+            "explicacion": "Asume que el patrón solo coincide con la primera letra mayúscula 'H', ignorando el comportamiento codicioso de +."
+          },
+          "c": {
+            "tipo_error": "Error de alcance",
+            "explicacion": "Cree que el patrón coincide con toda la cadena 'Hello World' porque IGNORECASE afecta a todo el texto, pero el patrón [A-Z]+ solo coincide con secuencias de letras (no incluye el espacio)."
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python (Python 3)",
+        "fuente": "Texto proporcionado",
+        "planificacion": {
+            "temas_identificados": [
+                {
+                    "tema": "Fundamentos de cadenas (inmutabilidad, indexación, concatenación, len, tipos)",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Métodos de cadena (lower, upper, strip, find, replace, split, join)",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Rebanadas de cadena (slicing positivo, negativo, propiedades)",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Formateo de cadenas (f-strings, operador %)",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Raw strings, Unicode y bytes (prefijo r, prefijo b, encode/decode)",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Sentencia if (sintaxis, valores falsy, operadores booleanos)",
+                    "peso_relativo": "bajo"
+                }
+            ],
+            "asignacion_preguntas": [
+                {
+                    "pregunta_id": 1,
+                    "tema": "Fundamentos de cadenas (inmutabilidad)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 2,
+                    "tema": "Rebanadas de cadena (índices negativos)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "a"
+                },
+                {
+                    "pregunta_id": 3,
+                    "tema": "Fundamentos de cadenas (conversión de tipos)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "c"
+                },
+                {
+                    "pregunta_id": 4,
+                    "tema": "Métodos de cadena (split y join)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 5,
+                    "tema": "Formateo de cadenas (f-strings)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "a"
+                }
+            ],
+            "temas_excluidos": "Se excluyen 'Raw strings, Unicode y bytes' (peso bajo, contenido marginal) y 'Sentencia if' (peso bajo, no es el foco del documento sobre cadenas). Los 4 temas seleccionados cubren el núcleo del documento.",
+            "verificacion": "Dificultad: Media=3, Alta=2 → cumple R7. Respuestas: a=2, b=2, c=1 → máx. 2 por letra (40%) → cumple R8."
+        },
+        "distribucion_tematica": [
+            {
+                "tema": "Fundamentos de cadenas (inmutabilidad, indexación, concatenación, tipos)",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Rebanadas de cadena (slicing)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Métodos de cadena (split, join)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Formateo de cadenas (f-strings)",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_dificultad": {
+            "Media": 3,
+            "Alta": 2
+        },
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 2,
+            "c": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Fundamentos de cadenas (inmutabilidad)",
+            "dificultad": "Media",
+            "nivel_bloom": "Comprender",
+            "enunciado": "¿Qué valor contiene la variable `msg` tras ejecutar el siguiente código?\n\n```\nmsg = 'hola'\nmsg.upper()\nprint(msg)\n```",
+            "opciones": {
+                "a": "HOLA",
+                "b": "hola",
+                "c": "Hola"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que las cadenas de Python son inmutables y que se construyen nuevas cadenas para representar los valores calculados. Los métodos de cadena devuelven una nueva cadena, no modifican la original.",
+                "razon_respuesta_correcta": "msg.upper() devuelve una nueva cadena 'HOLA', pero ese valor no se reasigna a ninguna variable. La variable msg sigue apuntando a la cadena original 'hola'.",
+                "nivel_cognitivo_evaluado": "Comprender",
+                "concepto_principal": "Inmutabilidad de las cadenas y comportamiento de los métodos de string",
+                "error_comun_evaluado": "Creer que los métodos de cadena modifican la cadena original in situ, como ocurre con algunos métodos de lista",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que upper() modifica la cadena original en lugar de devolver una nueva, confundiendo el comportamiento inmutable de str con el mutable de list."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Supone que upper() solo transforma el primer carácter, confundiéndolo con capitalize() o con una conversión parcial."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Rebanadas de cadena (slicing con índices negativos)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Dada la cadena `s = 'Python'`, ¿qué devuelve la expresión `s[-4:-1]`?",
+            "opciones": {
+                "a": "tho",
+                "b": "thon",
+                "c": "yth",
+                "d": "ytho"
+            },
+            "justificacion_4_opciones": "El slicing con índices negativos admite cuatro interpretaciones según cómo el estudiante resuelva la equivalencia de los índices negativos y si incluye o excluye el límite final. Cada combinación produce una opción distinta con valor discriminativo real.",
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que los índices negativos cuentan desde el final de la cadena (s[-1] es el último carácter) y que el slicing s[start:end] se extiende hasta, pero sin incluir, end.",
+                "razon_respuesta_correcta": "En 'Python' (índices 0-5), s[-4] equivale a s[2] = 't' y s[-1] equivale a s[5] = más allá del último carácter visible. El slice s[-4:-1] toma los índices 2, 3 y 4, es decir 't', 'h', 'o' → 'tho'.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Combinación de índices negativos con slicing y límite superior exclusivo",
+                "error_comun_evaluado": "Calcular incorrectamente la posición de los índices negativos o incluir el límite superior",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Calcula bien el inicio en s[-4] = 't', pero incluye el carácter en la posición -1 ('n'), olvidando que el límite superior del slice es exclusivo."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Desplaza los índices negativos una posición (interpreta -4 como el índice 1 en lugar del 2), obteniendo 'y', 't', 'h'."
+                    },
+                    "d": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Combina el desplazamiento erróneo de los índices negativos con la inclusión del límite superior, obteniendo cuatro caracteres desde 'y'."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Fundamentos de cadenas (conversión de tipos)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué ocurre al ejecutar la expresión `'Edad: ' + 25`?",
+            "opciones": {
+                "a": "Se imprime 'Edad: 25'",
+                "b": "Se imprime 'Edad: ' y se descarta el 25",
+                "c": "Se produce un error de tipo (TypeError)"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento indica que, a diferencia de Java, el operador '+' no convierte automáticamente números u otros tipos a formato de cadena. Es necesario usar la función str() para convertir valores antes de concatenarlos.",
+                "razon_respuesta_correcta": "Python no realiza conversión implícita de int a str con el operador +. Al intentar concatenar un str con un int directamente, se lanza un TypeError.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Ausencia de conversión implícita de tipos en la concatenación con +",
+                "error_comun_evaluado": "Asumir que Python convierte automáticamente números a cadena al concatenar, como hace Java",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume conversión automática de int a str, como ocurre en Java o JavaScript, donde el operador + convierte implícitamente."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Supone que Python ignora silenciosamente los tipos incompatibles y descarta el valor numérico, un comportamiento que no existe en Python."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Métodos de cadena (split y join)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué resultado produce el siguiente código?\n\n```\nfrase = 'uno-dos-tres'\npartes = frase.split('-')\nresultado = ' '.join(partes)\nprint(resultado)\n```",
+            "opciones": {
+                "a": "uno-dos-tres",
+                "b": "uno dos tres",
+                "c": "['uno', 'dos', 'tres']"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento define s.split('delim') como un método que devuelve una lista de subcadenas separadas por el delimitador. También define s.join(list) como la operación inversa, que une los elementos de la lista usando la cadena como delimitador.",
+                "razon_respuesta_correcta": "split('-') divide 'uno-dos-tres' en ['uno', 'dos', 'tres']. Luego ' '.join(['uno', 'dos', 'tres']) une esos elementos con un espacio como delimitador, produciendo 'uno dos tres'.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Relación inversa entre split y join y el papel del delimitador",
+                "error_comun_evaluado": "Confundir qué delimitador se aplica en cada paso o no comprender que join produce una cadena, no una lista",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Supone que join reconstruye la cadena con el delimitador original '-' en lugar de usar el nuevo delimitador ' ' sobre el que se invoca el método."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde el resultado de split (una lista) con el resultado de join (una cadena), imprimiendo la representación de la lista en lugar del texto unido."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Formateo de cadenas (f-strings)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nprecio = 19.5\nprint(f'Total: {precio:.2f} euros')\n```",
+            "opciones": {
+                "a": "Total: 19.50 euros",
+                "b": "Total: 19.5 euros",
+                "c": "Total: {precio:.2f} euros"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento muestra un ejemplo donde el especificador :.2f dentro de una f-string formatea un float con dos decimales: f'approximate value = {value:.2f}' imprime 'approximate value = 2.79' para value = 2.791514.",
+                "razon_respuesta_correcta": "El especificador :.2f formatea el número con exactamente 2 decimales. Como 19.5 tiene un solo decimal, se añade un cero, resultando '19.50'.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Uso de especificadores de formato en f-strings para controlar decimales",
+                "error_comun_evaluado": "Creer que :.2f solo trunca decimales existentes sin añadir ceros, o no reconocer la sintaxis de f-string",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Asume que :.2f muestra el número tal cual sin rellenar con ceros, ignorando que el especificador fuerza exactamente dos posiciones decimales."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Supone que las llaves se imprimen de forma literal, como si la cadena no tuviera el prefijo f. Confunde una cadena normal con una f-string."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,255 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python (Python 3)",
+        "fuente": "Texto proporcionado",
+        "planificacion": {
+            "temas_identificados": [
+                {
+                    "tema": "Diccionarios: creación, acceso, get(), KeyError, operador in",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Iteración sobre diccionarios: keys(), values(), items(), sorted()",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Formateo de diccionarios con % y format()",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Operador del: eliminación en variables, listas y diccionarios",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Archivos: open(), modos de lectura/escritura, read(), readlines(), for",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Archivos Unicode: encoding, with statement",
+                    "peso_relativo": "bajo"
+                }
+            ],
+            "asignacion_preguntas": [
+                {
+                    "pregunta_id": 1,
+                    "tema": "Diccionarios (método get con valor por defecto)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "c"
+                },
+                {
+                    "pregunta_id": 2,
+                    "tema": "Operador del (eliminación en listas con slicing negativo)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "a"
+                },
+                {
+                    "pregunta_id": 3,
+                    "tema": "Iteración sobre diccionarios (for loop sobre dict)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 4,
+                    "tema": "Diccionarios (patrón de conteo con get)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "c"
+                },
+                {
+                    "pregunta_id": 5,
+                    "tema": "Archivos (diferencia entre read y readlines)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "a"
+                }
+            ],
+            "temas_excluidos": "Se excluyen 'Formateo de diccionarios con % y format()' (peso bajo, uso marginal) y 'Archivos Unicode' (peso bajo, caso específico de archivos). Los 4 temas seleccionados cubren el núcleo del documento.",
+            "verificacion": "Dificultad: Media=3, Alta=2 → cumple R7. Respuestas: a=2, b=1, c=2 → máx. 2 por letra (40%) → cumple R8."
+        },
+        "distribucion_tematica": [
+            {
+                "tema": "Diccionarios (acceso y métodos)",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Operador del",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Iteración sobre diccionarios",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Archivos",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_dificultad": {
+            "Media": 3,
+            "Alta": 2
+        },
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 2
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Diccionarios (método get con valor por defecto)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\ndatos = {'x': 10, 'y': 20}\nprint(datos.get('z', 0))\n```",
+            "opciones": {
+                "a": "Se produce un KeyError",
+                "b": "None",
+                "c": "0"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento indica que dict.get(key) devuelve el valor o None si la clave no está presente, y que get(key, not-found) permite especificar qué valor devolver en caso de no encontrarse.",
+                "razon_respuesta_correcta": "get('z', 0) busca la clave 'z', que no existe en el diccionario. Al tener un segundo argumento (0), devuelve ese valor por defecto en lugar de None.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Uso de dict.get() con valor por defecto para evitar KeyError",
+                "error_comun_evaluado": "Confundir el comportamiento de get() con el acceso directo por corchetes, o ignorar el segundo argumento de get()",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde get() con el acceso directo dict['z'], que sí lanza KeyError cuando la clave no existe."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Conoce que get() no lanza error, pero ignora el segundo argumento y asume que siempre devuelve None cuando la clave no existe."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Operador del (eliminación en listas con slicing negativo)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nlista = ['a', 'b', 'c', 'd', 'e']\ndel lista[-2:]\nprint(lista)\n```",
+            "opciones": {
+                "a": "['a', 'b', 'c']",
+                "b": "['a', 'b', 'c', 'd']",
+                "c": "['a', 'b']",
+                "d": "['d', 'e']"
+            },
+            "justificacion_4_opciones": "La expresión del lista[-2:] combina tres conceptos (operador del, índices negativos y slicing sin límite final) que generan cuatro interpretaciones erróneas igualmente plausibles según cómo el estudiante interprete el índice negativo y qué elementos cree que se eliminan frente a cuáles se conservan.",
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento muestra un ejemplo donde del list[-2:] elimina los dos últimos elementos de una lista: partiendo de ['a', 'b', 'c', 'd'], del list[-2:] deja ['b'] (tras haber eliminado el primer elemento previamente).",
+                "razon_respuesta_correcta": "lista[-2:] selecciona los elementos desde el penúltimo hasta el final, es decir 'd' y 'e'. El operador del elimina esos elementos, dejando ['a', 'b', 'c'].",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Combinación del operador del con slicing e índices negativos en listas",
+                "error_comun_evaluado": "Calcular incorrectamente la posición del índice negativo o confundir qué elementos se eliminan con cuáles se conservan",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Interpreta -2: como si eliminase solo el último elemento, calculando mal el alcance del índice negativo -2 (lo trata como -1)."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Interpreta -2 como 'los últimos tres elementos' en lugar de 'desde el penúltimo', eliminando c, d y e."
+                    },
+                    "d": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde el efecto de del: cree que del devuelve los elementos eliminados en lugar de conservar los restantes en la lista."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Iteración sobre diccionarios (for loop sobre dict)",
+            "dificultad": "Media",
+            "nivel_bloom": "Comprender",
+            "enunciado": "¿Qué elementos imprime el siguiente bucle?\n\n```\ninfo = {'nombre': 'Ana', 'edad': 25}\nfor elemento in info:\n    print(elemento)\n```",
+            "opciones": {
+                "a": "Ana y 25 (los valores)",
+                "b": "nombre y edad (las claves)",
+                "c": "('nombre', 'Ana') y ('edad', 25) (tuplas clave-valor)"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que un bucle for en un diccionario itera sobre sus claves por defecto, y que para obtener pares clave-valor se debe usar el método items().",
+                "razon_respuesta_correcta": "Al iterar directamente sobre un diccionario con for, Python recorre las claves. Por tanto se imprimen 'nombre' y 'edad', no los valores ni las tuplas.",
+                "nivel_cognitivo_evaluado": "Comprender",
+                "concepto_principal": "Comportamiento por defecto de la iteración sobre un diccionario",
+                "error_comun_evaluado": "Creer que el for itera sobre los valores o sobre pares clave-valor, en lugar de solo sobre las claves",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que iterar sobre un diccionario recorre sus valores, confundiendo el comportamiento por defecto con el de dict.values()."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que el for devuelve tuplas (clave, valor), confundiendo la iteración por defecto con el comportamiento de dict.items()."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Diccionarios (patrón de conteo con get)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\npalabras = ['sol', 'mar', 'sol', 'sol', 'mar', 'rio']\nconteo = {}\nfor p in palabras:\n    conteo[p] = conteo.get(p, 0) + 1\nprint(conteo['sol'])\n```",
+            "opciones": {
+                "a": "1",
+                "b": "2",
+                "c": "3"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que dict.get(key, not-found) devuelve el valor asociado a la clave o el valor por defecto si no existe. Además, indica que el diccionario es una herramienta ideal para organizar datos, como contar apariciones.",
+                "razon_respuesta_correcta": "En cada iteración, conteo.get(p, 0) devuelve el conteo actual de la palabra (o 0 si es la primera vez) y le suma 1. 'sol' aparece 3 veces en la lista, por lo que conteo['sol'] vale 3.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Patrón de acumulación en diccionarios usando get() con valor por defecto",
+                "error_comun_evaluado": "No seguir correctamente el estado del diccionario a lo largo de las iteraciones del bucle, o malinterpretar el papel del valor por defecto en get()",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Cree que get(p, 0) siempre devuelve 0, de modo que conteo[p] se resetea a 1 en cada iteración en lugar de acumularse."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Cuenta mal las apariciones de 'sol' en la lista (confunde con 'mar', que sí aparece 2 veces) o pierde una iteración en el seguimiento mental del bucle."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Archivos (diferencia entre read y readlines)",
+            "dificultad": "Media",
+            "nivel_bloom": "Comprender",
+            "enunciado": "Cuando se abre un archivo de texto y se llama al método `f.read()`, ¿qué tipo de dato se obtiene?",
+            "opciones": {
+                "a": "Una única cadena con todo el contenido del archivo",
+                "b": "Una lista donde cada elemento es una línea del archivo",
+                "c": "Un iterador que recorre las líneas una a una"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento indica que f.read() lee todo el archivo en una sola cadena, mientras que f.readlines() lee todo el archivo y devuelve su contenido como una lista de sus líneas.",
+                "razon_respuesta_correcta": "f.read() devuelve una única cadena (str) que contiene todo el texto del archivo, incluyendo los saltos de línea como caracteres dentro de la cadena.",
+                "nivel_cognitivo_evaluado": "Comprender",
+                "concepto_principal": "Diferencia entre los métodos read() y readlines() en el manejo de archivos",
+                "error_comun_evaluado": "Confundir read() con readlines(), o asumir que cualquier lectura de archivo devuelve las líneas como lista",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde read() con readlines(), que es el método que sí devuelve una lista de líneas."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde read() con la iteración directa sobre el objeto archivo (for line in f), que sí recorre las líneas una a una sin cargar todo en memoria."
+                    }
+                }
+            }
+        }
+    ]
+}

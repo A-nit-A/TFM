@@ -1,0 +1,233 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado: Cadenas.md",
+        "distribucion_tematica": [
+            {
+                "tema": "Indexación y slicing de cadenas",
+                "peso": 40,
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Métodos de cadena",
+                "peso": 20,
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Formateo de cadenas (f-strings)",
+                "peso": 20,
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Inmutabilidad y codificación Unicode",
+                "peso": 20,
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 1,
+            "d": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Slicing de cadenas con índices negativos",
+            "fragmento_origen": "Sección 'Rebanadas de cadena (String Slices)', párrafos sobre índices negativos",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Dada la cadena `s = \"Python\"`, ¿qué resultado produce la expresión `s[-3:-1]`?",
+            "opciones": {
+                "a": "\"th\"",
+                "b": "\"thon\"",
+                "c": "\"yo\"",
+                "d": "\"hon\""
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Los números de índice negativos cuentan hacia atrás desde el final de la cadena: s[-1] es 'o', s[-2] es 'n', s[-3] es 'h'. La sintaxis s[start:end] incluye start y excluye end.",
+                    "seccion": "Rebanadas de cadena (String Slices)"
+                },
+                "razon_respuesta_correcta": "s[-3] es 't' (tercer carácter desde el final) y s[-1] es 'n' (último carácter). La rebanada s[-3:-1] incluye los índices -3 y -2 ('t' y 'h'), pero excluye -1 ('n'), resultando en 'th'.",
+                "concepto_principal": "Índices negativos y límite superior exclusivo en slicing",
+                "error_comun_evaluado": "Confusión entre el límite exclusivo de slicing y la dirección de los índices negativos",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error de límite exclusivo",
+                        "explicacion": "Incluye incorrectamente el carácter en el índice -1 ('n'), asumiendo que el límite superior es inclusivo."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual en índices negativos",
+                        "explicacion": "Interpreta -3 como el tercer carácter desde el inicio ('y') y -1 como el primero desde el inicio ('P'), ignorando que los índices negativos cuentan desde el final."
+                    },
+                    "d": {
+                        "tipo_error": "Error de dirección y límite",
+                        "explicacion": "Asume que -3 es 'h' (correcto) pero incluye desde -3 hasta el final, ignorando el límite exclusivo en -1."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Métodos de cadena (split y upper)",
+            "fragmento_origen": "Sección 'Métodos de cadena (String Methods)', ejemplos de split() y upper()",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Si ejecutamos el código `texto = \"Hola,Mundo,Python\".split(',')[1].upper()`, ¿qué valor almacena la variable `texto`?",
+            "opciones": {
+                "a": "\"Mundo\"",
+                "b": "\"Hola\"",
+                "c": "\"PYTHON\"",
+                "d": "\"MUNDO\""
+            },
+            "respuesta_correcta": "d",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "s.split('delim') devuelve una lista de subcadenas separadas por el delimitador dado. s.upper() devuelve la versión en mayúsculas de la cadena.",
+                    "seccion": "Métodos de cadena (String Methods)"
+                },
+                "razon_respuesta_correcta": "`\"Hola,Mundo,Python\".split(',')` produce la lista `['Hola', 'Mundo', 'Python']`. El índice `[1]` selecciona `'Mundo'`, y `.upper()` lo convierte a `'MUNDO'`.",
+                "concepto_principal": "Encadenamiento de métodos de cadena (split y upper) y acceso por índice",
+                "error_comun_evaluado": "Confusión entre el índice de la lista resultante de split() y el orden de los elementos",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Olvida aplicar el método `.upper()` al resultado de `split()[1]`."
+                    },
+                    "b": {
+                        "tipo_error": "Error de índice",
+                        "explicacion": "Accede al primer elemento de la lista (`[0]`) en lugar del segundo (`[1]`)."
+                    },
+                    "c": {
+                        "tipo_error": "Error de índice",
+                        "explicacion": "Accede al tercer elemento de la lista (`[2]`) en lugar del segundo (`[1]`)."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Inmutabilidad de cadenas",
+            "fragmento_origen": "Sección inicial: 'Las cadenas de Python son \"inmutables\"...'",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\ns = \"Python\"\nprint(s[1:] + s[:1])\n```",
+            "opciones": {
+                "a": "\"PythonP\"",
+                "b": "\"ythonP\"",
+                "c": "\"Python\"",
+                "d": "\"ython\""
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Las cadenas son inmutables, por lo que se construyen nuevas cadenas para representar valores calculados. La sintaxis s[start:end] permite extraer subcadenas.",
+                    "seccion": "Introducción y Rebanadas de cadena (String Slices)"
+                },
+                "razon_respuesta_correcta": "s[1:] extrae la subcadena desde el índice 1 hasta el final ('ython'), y s[:1] extrae desde el inicio hasta el índice 1 (exclusivo), es decir, 'P'. La concatenación 'ython' + 'P' resulta en 'ythonP'.",
+                "concepto_principal": "Concatenación de subcadenas obtenidas mediante slicing",
+                "error_comun_evaluado": "Confusión sobre los límites inclusivos/exclusivos en slicing y su efecto en la concatenación",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de límite inclusivo",
+                        "explicacion": "Asume que s[1:] incluye el carácter en el índice 0 ('P'), resultando en 'Python' + 'P'."
+                    },
+                    "c": {
+                        "tipo_error": "Error de concatenación",
+                        "explicacion": "No aplica correctamente la concatenación y asume que el resultado es la cadena original."
+                    },
+                    "d": {
+                        "tipo_error": "Error de omisión",
+                        "explicacion": "Olvida concatenar s[:1] ('P') al resultado de s[1:]."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Formateo de cadenas (f-strings)",
+            "fragmento_origen": "Sección 'Formateo de cadenas (String formatting)', subsección 'Literales de cadena formateados (Formatted string literals)'",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nx = 10\ny = 3\nprint(f\"{x//y} {x/y:.1f}\")\n```",
+            "opciones": {
+                "a": "\"3 3.3\"",
+                "b": "\"3 3.333333\"",
+                "c": "\"3.3 3\"",
+                "d": "\"3.0 3.3\""
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Las f-strings permiten incrustar expresiones dentro de llaves {}. La especificación de formato :.1f redondea el número a 1 decimal.",
+                    "seccion": "Literales de cadena formateados (Formatted string literals)"
+                },
+                "razon_respuesta_correcta": "x//y realiza división entera (10//3 = 3). x/y realiza división flotante (10/3 ≈ 3.333...), y el formato :.1f lo redondea a 1 decimal, resultando en 3.3.",
+                "concepto_principal": "Operadores de división (// vs /) y formateo numérico en f-strings",
+                "error_comun_evaluado": "Confusión entre división entera (//) y flotante (/), así como el efecto de los especificadores de formato",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error de formato",
+                        "explicacion": "Ignora el especificador de formato :.1f, mostrando todos los decimales de la división flotante."
+                    },
+                    "c": {
+                        "tipo_error": "Error de operador",
+                        "explicacion": "Confunde el orden de los operadores, usando / para la primera parte y // para la segunda."
+                    },
+                    "d": {
+                        "tipo_error": "Error de tipo",
+                        "explicacion": "Asume que x//y devuelve un float (3.0) en lugar de un int (3), y aplica incorrectamente el formato a la división entera."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Codificación Unicode y bytes",
+            "fragmento_origen": "Sección 'Cadenas (Unicode frente a bytes)'",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué ocurre al ejecutar el siguiente código?\n```python\ns = 'café'\nb = s.encode('utf-8')\nt = b.decode('utf-8')\nprint(t == s)\n```",
+            "opciones": {
+                "a": "Produces un error porque el carácter 'é' no puede codificarse en UTF-8",
+                "b": "Imprime False porque la codificación UTF-8 modifica el contenido original",
+                "c": "Imprime True porque encode() y decode() preservan el texto original",
+                "d": "Imprime None porque print() devuelve None"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Las cadenas normales de Python son unicode. El método encode() convierte una cadena unicode a bytes, y decode() convierte bytes de vuelta a una cadena unicode. La codificación UTF-8 soporta todos los caracteres unicode, incluyendo 'é'.",
+                    "seccion": "Cadenas (Unicode frente a bytes)"
+                },
+                "razon_respuesta_correcta": "s.encode('utf-8') convierte la cadena unicode 'café' a su representación en bytes UTF-8. b.decode('utf-8') convierte esos bytes de vuelta a una cadena unicode idéntica a la original. Por lo tanto, t == s evalúa a True.",
+                "concepto_principal": "Codificación y decodificación UTF-8 en Python y preservación de datos",
+                "error_comun_evaluado": "Desconocimiento de que UTF-8 soporta todos los caracteres unicode y que encode/decode son operaciones inversas",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume incorrectamente que UTF-8 no soporta caracteres no ASCII como 'é'."
+                    },
+                    "b": {
+                        "tipo_error": "Error de comprensión",
+                        "explicacion": "Cree que la codificación modifica el contenido semántico de la cadena, cuando en realidad solo cambia su representación (bytes vs unicode)."
+                    },
+                    "d": {
+                        "tipo_error": "Error de confusión entre impresión y retorno",
+                        "explicacion": "Confunde el valor impreso (True) con el valor devuelto por print() (None), que no es lo que se evalúa en la expresión."
+                    }
+                }
+            }
+        }
+    ]
+}

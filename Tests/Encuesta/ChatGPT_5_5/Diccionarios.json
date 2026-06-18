@@ -1,0 +1,205 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado",
+        "distribucion_tematica": [
+            {
+                "tema": "Diccionarios",
+                "num_preguntas": 3
+            },
+            {
+                "tema": "Archivos",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Eliminación con del",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 1,
+            "b": 1,
+            "c": 2,
+            "d": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Diccionarios",
+            "fragmento_origen": "Acceso seguro a claves",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Supón que `d = {'a': 1}`. ¿Qué expresión permite obtener el valor asociado a la clave `'z'` sin provocar una excepción cuando la clave no existe?",
+            "opciones": {
+                "a": "d['z']",
+                "b": "d.keys('z')",
+                "c": "d.get('z')"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "dict.get(key) devuelve el valor o None si la clave no está presente.",
+                    "seccion": "Tabla Hash de Diccionarios (Dict)"
+                },
+                "razon_respuesta_correcta": "get() devuelve None cuando la clave no existe, evitando el KeyError.",
+                "concepto_principal": "Acceso seguro a claves inexistentes",
+                "error_comun_evaluado": "Suponer que acceder mediante corchetes es seguro para cualquier clave",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Lanza KeyError si la clave no existe."
+                    },
+                    "b": {
+                        "tipo_error": "Error sintáctico",
+                        "explicacion": "keys() no acepta una clave como argumento de búsqueda."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Diccionarios",
+            "fragmento_origen": "Recorrido completo con items()",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué construcción permite recorrer simultáneamente cada clave y su valor de un diccionario de la forma más eficiente descrita en el documento?",
+            "opciones": {
+                "a": "for k in dict.keys(): print(k, dict[k])",
+                "b": "for k, v in dict.items(): print(k, v)",
+                "c": "for v in dict.values(): print(v)"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "items() devuelve tuplas (clave, valor) y es la forma más eficiente de examinar todos los datos.",
+                    "seccion": "Tabla Hash de Diccionarios (Dict)"
+                },
+                "razon_respuesta_correcta": "items() proporciona directamente cada par clave-valor en cada iteración.",
+                "concepto_principal": "Iteración eficiente sobre diccionarios",
+                "error_comun_evaluado": "Confundir recorrido de claves o valores con recorrido de pares clave-valor",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de eficiencia",
+                        "explicacion": "Funciona, pero requiere una búsqueda adicional para obtener el valor."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Solo accede a los valores y no a las claves."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Archivos",
+            "fragmento_origen": "Lectura de archivos de texto",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Cuál es la principal ventaja de recorrer un archivo de texto mediante un bucle `for line in f` frente a utilizar `f.readlines()`?",
+            "opciones": {
+                "a": "Permite modificar el archivo mientras se lee.",
+                "b": "Lee todas las líneas más rápido porque las almacena en memoria.",
+                "c": "Permite procesar archivos grandes sin cargar todo su contenido en memoria."
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Leer línea a línea evita que todo el archivo tenga que caber en memoria.",
+                    "seccion": "Archivos"
+                },
+                "razon_respuesta_correcta": "El archivo se procesa progresivamente, reduciendo el consumo de memoria.",
+                "concepto_principal": "Lectura eficiente de archivos",
+                "error_comun_evaluado": "Confundir lectura secuencial con carga completa en memoria",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "No es una ventaja mencionada ni relacionada con el método."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Describe precisamente el comportamiento de readlines()."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Eliminación con del",
+            "fragmento_origen": "Uso de del en listas y diccionarios",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Dado el diccionario `d = {'a':1, 'b':2, 'c':3}`, ¿qué resultado produce ejecutar `del d['b']`?",
+            "opciones": {
+                "a": "{'a':1, 'b':2}",
+                "b": "{'a':1, 'c':3}",
+                "c": "{'b':2, 'c':3}"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "del dict['b'] elimina la entrada asociada a la clave 'b'.",
+                    "seccion": "Del"
+                },
+                "razon_respuesta_correcta": "La entrada con clave 'b' desaparece y el resto permanece intacto.",
+                "concepto_principal": "Eliminación de entradas en diccionarios",
+                "error_comun_evaluado": "Interpretar del como una reasignación parcial o eliminación incorrecta",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Elimina la clave equivocada."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Conserva la clave que debería eliminarse."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Diccionarios",
+            "fragmento_origen": "Formateo de diccionarios",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Si `h = {'word':'garfield', 'count':42}`, ¿qué resultado produce la expresión `'I want %(count)d copies of %(word)s' % h`?",
+            "opciones": {
+                "a": "I want garfield copies of 42",
+                "b": "I want %(count)d copies of %(word)s",
+                "c": "I want 42 copies of garfield",
+                "d": "I want count copies of word"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El operador % puede sustituir valores de un diccionario por su nombre.",
+                    "seccion": "Formateo de Diccionarios"
+                },
+                "razon_respuesta_correcta": "Las claves del diccionario sustituyen sus marcadores correspondientes en la cadena.",
+                "concepto_principal": "Interpolación de cadenas mediante diccionarios",
+                "error_comun_evaluado": "Confusión entre nombres de claves, valores y marcadores de formato",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Invierte los valores asociados a las claves."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que no se realiza sustitución alguna."
+                    },
+                    "d": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde los nombres de las claves con sus valores."
+                    }
+                }
+            }
+        }
+    ]
+}

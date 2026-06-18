@@ -1,0 +1,203 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado: Diccionarios_Archivos.md",
+        "distribucion_tematica": [
+            {
+                "tema": "Diccionarios (operaciones básicas, métodos y formateo)",
+                "peso": 60,
+                "num_preguntas": 3
+            },
+            {
+                "tema": "Manejo de archivos (lectura, escritura y procesamiento)",
+                "peso": 40,
+                "num_preguntas": 2
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 2
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Acceso seguro a diccionarios con get()",
+            "fragmento_origen": "Sección 'Tabla Hash de Diccionarios (Dict)', párrafo sobre dict.get(key) y KeyError",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Dado el diccionario `d = {'a': 1, 'b': 2}`, ¿qué devuelve la expresión `d.get('c')`?",
+            "opciones": {
+                "a": "KeyError",
+                "b": "None",
+                "c": "0"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Buscar un valor que no está en el diccionario lanza un KeyError; utiliza dict.get(key) que devuelve el valor o None si la clave no está presente.",
+                    "seccion": "Tabla Hash de Diccionarios (Dict)"
+                },
+                "razon_respuesta_correcta": "El método get() devuelve None por defecto cuando la clave no existe en el diccionario, sin lanzar KeyError.",
+                "concepto_principal": "Método get() para acceso seguro a diccionarios",
+                "error_comun_evaluado": "Confundir el comportamiento de get() con el acceso directo mediante corchetes, que sí lanza KeyError",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde get() con el acceso directo dict['clave'], que sí lanza KeyError cuando la clave no existe."
+                    },
+                    "c": {
+                        "tipo_error": "Error de valor por defecto",
+                        "explicacion": "Asume que get() devuelve 0 por defecto, cuando en realidad devuelve None (a menos que se especifique otro valor con get(key, default))."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Métodos de diccionario (keys())",
+            "fragmento_origen": "Sección 'Tabla Hash de Diccionarios (Dict)', párrafo sobre dict.keys() y ejemplo de código",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nprint(type({'a': 1}.keys()))\n```",
+            "opciones": {
+                "a": "list",
+                "b": "dict",
+                "c": "dict_keys"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El método dict.keys() devuelve un objeto de tipo dict_keys, que es una vista de las claves del diccionario.",
+                    "seccion": "Tabla Hash de Diccionarios (Dict)"
+                },
+                "razon_respuesta_correcta": "El método keys() devuelve un objeto de tipo dict_keys, no una lista ni un diccionario.",
+                "concepto_principal": "Tipo de dato devuelto por el método keys() de un diccionario",
+                "error_comun_evaluado": "Asumir que keys() devuelve una lista (comportamiento en Python 2) o un diccionario",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de versión",
+                        "explicacion": "Confunde el comportamiento de Python 3 (dict_keys) con el de Python 2, donde keys() devuelva una lista."
+                    },
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Cree que keys() devuelve el diccionario original en lugar de una vista de sus claves."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Formateo de cadenas con diccionarios (operador %)",
+            "fragmento_origen": "Sección 'Formateo de Diccionarios', ejemplo con operador % y diccionario",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nh = {'word': 'Python', 'count': 3}\nprint('%(count)d copies of %(word)s' % h)\n```",
+            "opciones": {
+                "a": "3 copies of Python",
+                "b": "'count' copies of 'word'",
+                "c": "3 copies of word"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El operador % puede sustituir valores de un diccionario en una cadena por su nombre, usando la sintaxis %(nombre)tipo.",
+                    "seccion": "Formateo de Diccionarios"
+                },
+                "razon_respuesta_correcta": "El operador % sustituye %(count)d con el valor 3 (formateado como entero) y %(word)s con el valor 'Python' (formateado como cadena), resultando en '3 copies of Python'.",
+                "concepto_principal": "Sustitución de valores de diccionario en cadenas con el operador %",
+                "error_comun_evaluado": "Confundir la sintaxis de sustitución con el nombre literal de las claves en lugar de sus valores",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error de sustitución",
+                        "explicacion": "Interpreta literalmente %(count)d y %(word)s como las cadenas 'count' y 'word' en lugar de sustituirlas por sus valores en el diccionario."
+                    },
+                    "c": {
+                        "tipo_error": "Error de formato",
+                        "explicacion": "Sustituye correctamente los valores, pero omite el formateo de tipo (d para entero, s para cadena), resultando en una cadena mal formateada."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Lectura de archivos y longitud de contenido",
+            "fragmento_origen": "Sección 'Archivos', párrafo sobre f.read() y ejemplo de código",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código si el archivo 'foo.txt' contiene exactamente la cadena `\"Hola\\nMundo\"` (sin comillas, con un salto de línea entre ambas palabras)?\n```python\nf = open('foo.txt', 'rt')\ncontent = f.read()\nf.close()\nprint(len(content))\n```",
+            "opciones": {
+                "a": "1",
+                "b": "2",
+                "c": "11"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El método f.read() lee todo el archivo en una sola cadena. La cadena 'Hola\\nMundo' tiene 11 caracteres: H, o, l, a, \\n, M, u, n, d, o.",
+                    "seccion": "Archivos"
+                },
+                "razon_respuesta_correcta": "La cadena leída es 'Hola\\nMundo', que contiene 11 caracteres (incluyendo el salto de línea \\n). Por lo tanto, len(content) devuelve 11.",
+                "concepto_principal": "Lectura completa de archivos con f.read() y conteo de caracteres",
+                "error_comun_evaluado": "Confundir el número de líneas con el número total de caracteres o no contar el salto de línea",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Interpreta len(content) como el número de líneas en el archivo (1 línea si no se considera el salto de línea como separador)."
+                    },
+                    "b": {
+                        "tipo_error": "Error de conteo",
+                        "explicacion": "Cuenta el número de líneas (2: 'Hola' y 'Mundo') en lugar del número total de caracteres."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Procesamiento de archivos línea por línea",
+            "fragmento_origen": "Sección 'Archivos', párrafo sobre iteración con for line in f y ejemplo de código",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código si el archivo 'data.txt' contiene exactamente las líneas:\n```\n10\n20\n30\n```\n```python\nf = open('data.txt', 'rt')\ntotal = 0\nfor line in f:\n    total += int(line)\nf.close()\nprint(total)\n```",
+            "opciones": {
+                "a": "60",
+                "b": "102030",
+                "c": "0",
+                "d": "Error de conversión a entero"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El bucle for line in f itera a través de las líneas del archivo. Cada línea incluye el carácter de salto de línea, pero int(line) ignora los espacios en blanco al convertir a entero.",
+                    "seccion": "Archivos"
+                },
+                "razon_respuesta_correcta": "El bucle lee cada línea ('10\\n', '20\\n', '30\\n'), int(line) convierte cada una a entero (10, 20, 30), y la suma total es 60.",
+                "concepto_principal": "Iteración línea por línea en archivos y conversión de tipos",
+                "error_comun_evaluado": "Confundir la concatenación de cadenas con la suma de enteros o no considerar que int() ignora el salto de línea",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error de tipo",
+                        "explicacion": "Asume que las líneas se concatenan como cadenas en lugar de sumarse como enteros, resultando en '102030'."
+                    },
+                    "c": {
+                        "tipo_error": "Error de inicialización",
+                        "explicacion": "Olvida que total se incrementa en cada iteración y asume que el valor inicial (0) no cambia."
+                    },
+                    "d": {
+                        "tipo_error": "Error de conversión",
+                        "explicacion": "Cree que int(line) falla al intentar convertir el salto de línea, cuando en realidad int() ignora los espacios en blanco al final de la cadena."
+                    }
+                },
+                "justificacion_4_opciones": "El cuarto distractor (Error de conversión) representa un error conceptual común: asumir que el salto de línea en cada línea impide la conversión a entero. Este error es distinto de los demás (concatenación vs suma, inicialización) y tiene valor discriminativo real."
+            }
+        }
+    ]
+}

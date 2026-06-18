@@ -1,0 +1,216 @@
+{
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python 3",
+    "fuente": "Documento proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Indexación y slicing de cadenas",
+        "num_preguntas": 2
+      },
+      {
+        "tema": "Métodos de cadena",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Conversión y formateo de cadenas",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Evaluación booleana e if",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 1,
+      "b": 2,
+      "c": 1,
+      "d": 1
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Indexación y slicing de cadenas",
+      "fragmento_origen": "Rebanadas de cadena (String Slices)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Si `s = \"Hello\"`, ¿qué resultado produce la expresión `s[-4:]`?",
+      "opciones": {
+        "a": "Hell",
+        "b": "ello",
+        "c": "ell",
+        "d": "llo"
+      },
+      "justificacion_4_opciones": "Las cuatro opciones representan interpretaciones erróneas plausibles relacionadas con índices negativos, posición inicial y longitud del segmento extraído.",
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "Los índices negativos cuentan desde el final de la cadena.",
+          "seccion": "Rebanadas de cadena (String Slices)"
+        },
+        "razon_respuesta_correcta": "El índice -4 corresponde al carácter 'e'. Desde esa posición hasta el final se obtiene 'ello'.",
+        "concepto_principal": "Slicing con índices negativos",
+        "error_comun_evaluado": "Confusión sobre el punto de inicio cuando se utilizan índices negativos",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Omite incorrectamente el último carácter."
+          },
+          "c": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Confunde el índice inicial con una posición intermedia."
+          },
+          "d": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Interpreta -4 como si fuera -3."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Conversión y formateo de cadenas",
+      "fragmento_origen": "Conversión con str()",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "¿Qué modificación permite construir correctamente una cadena que incluya el valor de la variable `pi = 3.14` mediante concatenación con `+`?",
+      "opciones": {
+        "a": "'The value of pi is ' + pi",
+        "b": "'The value of pi is ' + str(pi)",
+        "c": "'The value of pi is ' + float(pi)"
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "La función str() convierte valores a formato de cadena para poder combinarlos con otras cadenas.",
+          "seccion": "Cadenas en Python"
+        },
+        "razon_respuesta_correcta": "str(pi) convierte el número en texto, permitiendo la concatenación.",
+        "concepto_principal": "Conversión explícita a cadena",
+        "error_comun_evaluado": "Suponer que Python convierte automáticamente números a texto durante la concatenación",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Python no concatena automáticamente cadenas y números."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "float(pi) sigue produciendo un número, no una cadena."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Métodos de cadena",
+      "fragmento_origen": "Métodos de cadena",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "¿Qué expresión devuelve la lista `['aaa', 'bbb', 'ccc']` a partir de la cadena `'aaa,bbb,ccc'`?",
+      "opciones": {
+        "a": "'aaa,bbb,ccc'.join(',')",
+        "b": "'aaa,bbb,ccc'.replace(',', ' ')",
+        "c": "'aaa,bbb,ccc'.split(',')"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "s.split('delim') devuelve una lista de subcadenas separadas por el delimitador.",
+          "seccion": "Métodos de cadena"
+        },
+        "razon_respuesta_correcta": "split(',') divide la cadena en cada coma y devuelve una lista.",
+        "concepto_principal": "Separación de cadenas mediante delimitadores",
+        "error_comun_evaluado": "Confundir split() con join() o replace()",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "join() realiza la operación inversa: une elementos de una lista."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "replace() devuelve una cadena modificada, no una lista."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Indexación y slicing de cadenas",
+      "fragmento_origen": "Rebanadas de cadena (String Slices)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Si `s = \"Hello\"`, ¿qué expresión produce el resultado `'He'`?",
+      "opciones": {
+        "a": "s[:-2]",
+        "b": "s[:2]",
+        "c": "s[-2:]",
+        "d": "s[2:]"
+      },
+      "justificacion_4_opciones": "Las opciones representan distintas interpretaciones plausibles del slicing utilizando índices positivos y negativos.",
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "s[:-3] es 'He', y las rebanadas excluyen el índice final.",
+          "seccion": "Rebanadas de cadena (String Slices)"
+        },
+        "razon_respuesta_correcta": "Eliminar los tres últimos caracteres deja únicamente 'He'.",
+        "concepto_principal": "Uso de índices negativos en slicing",
+        "error_comun_evaluado": "Confusión entre posiciones iniciales y finales en las rebanadas",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Selecciona los dos primeros caracteres, pero no aplica la lógica de exclusión desde el final descrita en el documento."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Obtiene los dos últimos caracteres."
+          },
+          "d": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Obtiene la subcadena desde el índice 2 hasta el final."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Evaluación booleana e if",
+      "fragmento_origen": "Sentencia If",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Según las reglas descritas para las condiciones en Python, ¿qué valor se evalúa como falso en una sentencia `if`?",
+      "opciones": {
+        "a": "True",
+        "b": "Una cadena no vacía",
+        "c": "Una lista vacía"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "confianza_documental": "Alta",
+        "evidencia_documental": {
+          "texto": "Los valores cero cuentan como falsos: cadena vacía, lista vacía, diccionario vacío, 0 y None.",
+          "seccion": "Sentencia If"
+        },
+        "razon_respuesta_correcta": "Una lista vacía pertenece al conjunto de valores considerados falsos.",
+        "concepto_principal": "Evaluación booleana implícita",
+        "error_comun_evaluado": "Pensar que cualquier colección se evalúa como verdadera",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "True siempre se evalúa como verdadero."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Las cadenas no vacías se consideran verdaderas."
+          }
+        }
+      }
+    }
+  ]
+}
