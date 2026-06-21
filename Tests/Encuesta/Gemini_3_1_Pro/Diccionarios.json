@@ -1,0 +1,192 @@
+{
+  "_espacio_de_trabajo_interno": {
+    "plan_tematico": "Q1 evalúa el comportamiento predeterminado del bucle for sobre diccionarios. Q2 evalúa el manejo seguro de claves inexistentes usando el método get(). Q3 evalúa la instrucción del aplicada a rebanadas negativas. Q4 evalúa la eficiencia en memoria al leer archivos grandes. Q5 evalúa qué tipos de datos (inmutables) son válidos como claves en un diccionario.",
+    "plan_dificultad": "Todas las preguntas son de nivel Medio o Alto, exigiendo al alumno inferir salidas, analizar el impacto en memoria o depurar comportamientos.",
+    "plan_distribucion_respuestas": "Asignación planificada: A para Q1 y Q4; B para Q2 y Q5; C para Q3. Total: A=2 (40%), B=2 (40%), C=1 (20%). D solo en Q3 como distractor. Se cumple la regla de distribución uniforme.",
+    "auditoria_final": "No hay bloques de código Markdown internos. Se ha usado estrictamente \\n y \\t para formatear el código. Las justificaciones se fundamentan en el documento fuente y los distractores capturan errores comunes."
+  },
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python",
+    "fuente": "Texto proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Tabla Hash de Diccionarios (Dict)",
+        "num_preguntas": 3
+      },
+      {
+        "tema": "Del",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Archivos",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 2,
+      "b": 2,
+      "c": 1,
+      "d": 0
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Tabla Hash de Diccionarios (Dict)",
+      "dificultad": "Media",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Analiza el siguiente fragmento de código:\n\nd = {'a': 1, 'b': 2}\nfor elemento in d:\n\tprint(elemento)\n\n¿Qué salida se imprimirá secuencialmente en la consola?",
+      "opciones": {
+        "a": "Las claves 'a' y 'b'.",
+        "b": "Los valores 1 y 2.",
+        "c": "Las tuplas ('a', 1) y ('b', 2)."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "Un bucle for en un diccionario itera sobre sus claves por defecto. Las claves aparecerán en un orden arbitrario.",
+        "razon_respuesta_correcta": "En Python, iterar directamente sobre un diccionario con un bucle 'for' devuelve únicamente sus claves. Para acceder a los valores o pares se requieren los métodos .values() o .items().",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Comportamiento predeterminado de iteración sobre estructuras tipo diccionario.",
+        "error_comun_evaluado": "Confundir el comportamiento del bucle estándar asumiendo que extrae los valores almacenados o la estructura completa por defecto.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Error común al asumir que el bucle for prioriza los valores (los datos útiles) en lugar de los índices/claves."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "El estudiante confunde la iteración estándar con la salida específica generada por el método d.items()."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Tabla Hash de Diccionarios (Dict)",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Un script necesita obtener el valor asociado a la clave 'z' en el diccionario `datos = {'a': 'alpha', 'g': 'gamma'}` sin que el programa se interrumpa si la clave no existe. Según el documento, ¿qué instrucción debe utilizar?",
+      "opciones": {
+        "a": "datos['z']",
+        "b": "datos.get('z')",
+        "c": "datos.values('z')"
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "Buscar un valor que no está en el diccionario lanza un KeyError; utiliza \"in\" para comprobar si la clave está en el diccionario, o utiliza dict.get(key) que devuelve el valor o None si la clave no está presente.",
+        "razon_respuesta_correcta": "El método .get() permite consultar una clave y retorna 'None' de forma segura en caso de no encontrarla, evitando el error de ejecución que sí produce el acceso directo con corchetes.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Manejo de excepciones implícitas y recuperación segura de datos en diccionarios.",
+        "error_comun_evaluado": "Uso inadecuado de corchetes provocando la detención del programa por un KeyError no gestionado.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Esta sintaxis arrojará obligatoriamente un KeyError porque la clave 'z' no se encuentra predefinida en el diccionario."
+          },
+          "c": {
+            "tipo_error": "Error sintáctico",
+            "explicacion": "Confunde el propósito del método values(), el cual devuelve una lista con todos los valores y no acepta una clave como parámetro de búsqueda."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Del",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Revisa el siguiente bloque de código:\n\nlista = ['a', 'b', 'c', 'd']\ndel lista[-2:]\nprint(lista)\n\n¿Qué resultado exacto se imprimirá por pantalla?",
+      "opciones": {
+        "a": "['a', 'b', 'c']",
+        "b": "['c', 'd']",
+        "c": "['a', 'b']",
+        "d": "['a', 'd']"
+      },
+      "justificacion_4_opciones": "La complejidad de calcular rebanadas negativas abiertas justifica cuatro distractores procedimentales reales: borrar solo un elemento (off-by-one), invertir los borrados reteniendo los cortados, calcular correctamente, y borrar solo elementos interiores limitando erróneamente el índice.",
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "Del también se puede usar en elementos o rebanadas (slices) de listas para eliminar esa parte de la lista [...] del list[-2:] ## Delete last two elements",
+        "razon_respuesta_correcta": "La rebanada 'lista[-2:]' selecciona desde el penúltimo elemento hasta el final ('c' y 'd'). La instrucción 'del' elimina esos dos elementos de la lista en su lugar de memoria, dejando únicamente ['a', 'b'].",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Mutación in situ de secuencias combinando la directiva 'del' con el mecanismo de indexado negativo y límites de rebanada.",
+        "error_comun_evaluado": "Cálculo erróneo de la longitud y el inicio de la rebanada negativa, fallando en el principio de desplazamiento de Python.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Error off-by-one: asume que '-2:' borra solo el último elemento o excluye el límite inferior."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Aplica lógica inversa asumiendo que 'del' conserva los valores de la rebanada y borra el resto."
+          },
+          "d": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Interpreta de manera equivocada la notación ':' creyendo que borra desde el índice 1 (-2) hasta el índice 2 (-1)."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Archivos",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Se necesita procesar un archivo de texto ('datos.txt') de 10 gigabytes. Según las buenas prácticas descritas en el documento, ¿qué enfoque es el adecuado para no agotar la memoria del sistema?",
+      "opciones": {
+        "a": "Usar un bucle 'for linea in f:' para iterar sobre el manejador del archivo abierto.",
+        "b": "Emplear 'f.read()' para volcar todo el texto en una única variable antes de procesarla.",
+        "c": "Llamar a 'f.readlines()' para cargar las líneas secuencialmente en una lista."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "El bucle for estándar funciona para archivos de texto, iterando a través de las líneas del archivo... Leer una línea a la vez tiene la excelente cualidad de que no todo el archivo necesita caber en la memoria al mismo tiempo; es muy útil si deseas examinar cada línea de un archivo de 10 gigabytes sin utilizar 10 gigabytes de memoria.",
+        "razon_respuesta_correcta": "El bucle 'for' que itera sobre el objeto archivo implementa una lectura perezosa (lazy), procesando línea a línea y liberando memoria, siendo el único método que impide el colapso del sistema con archivos gigantes.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Gestión eficiente de recursos en operaciones de entrada/salida de gran volumen.",
+        "error_comun_evaluado": "Desconocer que métodos integrados como .read() o .readlines() fuerzan la carga completa en memoria RAM antes de iterar.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "El método f.read() intenta crear una cadena continua con el total de bytes del fichero, desbordando instantáneamente la RAM del sistema."
+          },
+          "c": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Aunque devuelve las líneas separadas, f.readlines() primero construye una lista en memoria con absolutamente todas las líneas cargadas a la vez."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Tabla Hash de Diccionarios (Dict)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Comprender",
+      "enunciado": "Considerando las reglas sobre qué tipos de datos pueden actuar como claves en un diccionario de Python, ¿qué ocurrirá al ejecutar este código?\n\nclave = ('x', 10)\nd = {}\nd[clave] = 'Coordenada'\nprint(d)",
+      "opciones": {
+        "a": "Lanza un error de tipo (TypeError) porque las claves deben ser exclusivamente cadenas de texto.",
+        "b": "Se ejecuta correctamente y asigna el valor, ya que la tupla es una estructura inmutable.",
+        "c": "Convierte implícitamente la tupla a cadena ('x10') para permitir su uso como clave de tabla hash."
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "Las cadenas, los números y las tuplas funcionan como claves, y cualquier tipo puede ser un valor. Otros tipos pueden o no funcionar correctamente como claves (las cadenas y las tuplas funcionan perfectamente ya que son inmutables).",
+        "razon_respuesta_correcta": "Python requiere que las claves de los diccionarios sean hasheables (inmutables). Las tuplas cumplen este requisito, por lo que una tupla puede usarse de forma directa y literal como clave para mapear valores.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Relación entre el concepto de inmutabilidad y la capacidad para servir como clave de hash válida.",
+        "error_comun_evaluado": "Asumir que las estructuras de datos compuestas o anidadas están prohibidas como identificadores en estructuras clave-valor.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "El alumno arrastra reglas de otros lenguajes (como JSON) que obligan a usar exclusivamente cadenas de texto como identificadores clave."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Inventa una coerción o cast de tipos implícita que el motor de Python no realiza ni necesita realizar para las tuplas."
+          }
+        }
+      }
+    }
+  ]
+}

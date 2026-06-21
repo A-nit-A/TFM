@@ -1,0 +1,200 @@
+{
+  "_espacio_de_trabajo_interno": {
+    "plan_tematico": "Q1 evalúa el concepto de punteros y mutabilidad en la asignación de listas (no se copian, se referencian). Q2 evalúa el retorno vacío (None) de los métodos que mutan listas in situ como append(). Q3 evalúa la generación de iteraciones mediante la función range() y el límite superior exclusivo (off-by-one). Q4 evalúa la modificación de la lista base empleando asignaciones directas sobre rebanadas (slicing). Q5 evalúa el manejo de errores implícitos y el lanzamiento de ValueError al usar métodos de búsqueda integrados.",
+    "plan_dificultad": "Solo se incluyen niveles Medio y Alto. Q1 y Q4 requieren seguimientos de estado de memoria e inferencias de rebanadas. Q2 y Q5 requieren depuración teórica sobre cómo Python maneja respuestas de funciones vacías y ausencias. Ninguna es de reconocimiento literal.",
+    "plan_distribucion_respuestas": "Asignación proyectada: A para Q2 y Q5; B para Q3; C para Q1 y Q4. Totales: A=2 (40%), B=1 (20%), C=2 (40%). D solo existe en Q3. Distribución correcta y en norma.",
+    "auditoria_final": "Los valores no contienen triples tildes inversas de Markdown. Todos los bloques de código han sido integrados con \\n y \\t. La Q3 contiene una cuarta opción estrictamente justificada por las múltiples confusiones aritméticas típicas en los rangos numéricos."
+  },
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python",
+    "fuente": "Texto proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Referencias y Memoria en Listas",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Métodos de Lista In Situ",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Iteración y Range",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Rebanadas (Slices)",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Manejo de Errores en Búsqueda",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 2,
+      "b": 1,
+      "c": 2,
+      "d": 0
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Referencias y Memoria en Listas",
+      "dificultad": "Alta",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Analiza el siguiente fragmento de código:\n\ncolores = ['rojo', 'azul']\nrespaldo = colores\nrespaldo.append('verde')\nprint(colores)\n\n¿Qué imprimirá en la consola al ejecutarse?",
+      "opciones": {
+        "a": "['rojo', 'azul'] porque la modificación se hizo únicamente sobre la variable copia.",
+        "b": "Lanzará un error de ejecución por intentar mutar una variable directamente enlazada a otra.",
+        "c": "['rojo', 'azul', 'verde'] porque ambas variables apuntan al mismo espacio en memoria."
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "La asignación con un = en las listas no realiza una copia. En su lugar, la asignación hace que las dos variables apunten a la misma lista en memoria.",
+        "razon_respuesta_correcta": "En Python, asignar una lista a una nueva variable no clona sus datos, sino que crea una referencia hacia el mismo objeto en memoria. Al mutar la variable 'respaldo' con append(), la lista original 'colores' también refleja el cambio.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Comportamiento referencial de la memoria en la asignación de estructuras mutables.",
+        "error_comun_evaluado": "Asumir que el operador '=' crea una copia profunda o independiente (paso por valor) como ocurre con tipos primitivos en otros lenguajes.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "El estudiante asume que 'respaldo = colores' crea una copia aislada de los elementos, por lo que cree que 'colores' permanecerá inalterada."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Supone la existencia de mecanismos de protección de variables enlazadas o constantes que Python no implementa por defecto en listas."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Métodos de Lista In Situ",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "Revisa el siguiente intento de agregar un elemento a una lista:\n\nnumeros = [1, 2, 3]\nresultado = numeros.append(4)\nprint(resultado)\n\nConsiderando cómo operan los métodos de lista en Python, ¿qué salida producirá?",
+      "opciones": {
+        "a": "Imprime 'None' porque el método muta la lista original pero no devuelve la lista actualizada.",
+        "b": "Imprime '[1, 2, 3, 4]' ya que el método agrega el dato y retorna la estructura resultante.",
+        "c": "Lanza un error de sintaxis al no permitirse la asignación de métodos de mutación a una variable."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "Error común: ten en cuenta que los métodos anteriores no *devuelven* la lista modificada, simplemente modifican la lista original... print(list.append(4)) ## NO, does not work, append() returns None",
+        "razon_respuesta_correcta": "Los métodos que alteran listas en el lugar (in situ), como append(), sort() o reverse(), devuelven el valor nulo 'None' por diseño para enfatizar que la operación modificó el objeto subyacente y no generó uno nuevo.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Retorno vacío (NoneType) en métodos de mutación directa de colecciones.",
+        "error_comun_evaluado": "El error clásico (incluso resaltado en el documento) de encadenar métodos in situ creyendo que retornan el objeto modificado, perdiendo la lista en la reasignación.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Aplica una lógica funcional común en otros lenguajes (como JavaScript o métodos de strings en Python) donde las funciones siempre retornan el resultado."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Asume que Python interrumpe la ejecución por considerar la asignación ilegal, cuando en realidad es legal pero inútil sintácticamente."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Iteración y Range",
+      "dificultad": "Media",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Examina el siguiente bucle para la generación de secuencias numéricas:\n\nfor i in range(1, 4):\n\tprint(i)\n\n¿Qué valores numéricos exactos se imprimirán durante su ejecución?",
+      "opciones": {
+        "a": "1, 2, 3, 4",
+        "b": "1, 2, 3",
+        "c": "0, 1, 2, 3",
+        "d": "2, 3"
+      },
+      "justificacion_4_opciones": "La función range() es propensa a cuatro errores lógicos habituales: incluir el límite superior de manera inclusiva (a), comprender la sintaxis exclusiva correcta (b), ignorar el límite inferior y arrancar desde cero por defecto (c), o aplicar desplazamiento exclusivo en ambos extremos (d).",
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "La función range(n) genera los números 0, 1, ... n-1, y range(a, b) devuelve a, a+1, ... b-1 (es decir, hasta pero sin incluir el último número).",
+        "razon_respuesta_correcta": "La función range(a, b) inicia exactamente en el parámetro 'a' (1) de forma inclusiva, y se detiene una unidad antes de llegar al parámetro 'b' (4), generando por tanto únicamente los valores 1, 2 y 3.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Límites numéricos asimétricos (inclusivo-exclusivo) de la función integrada range().",
+        "error_comun_evaluado": "Confusión en los índices de detención, el llamado error 'off-by-one' asociado habitualmente a iteradores.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Error muy frecuente que ocurre al asumir que el segundo argumento establece un límite numérico inclusivo o final exacto."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "El estudiante confunde range(a, b) con el comportamiento de range(n), asumiendo que el bucle for siempre arranca desde el índice 0 independientemente de los argumentos pasados."
+          },
+          "d": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Aplica erróneamente exclusividad a ambos parámetros del rango, omitiendo también el valor inicial de arranque."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Rebanadas (Slices)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Un desarrollador utiliza sintaxis de rebanado para alterar masivamente los elementos internos de una lista:\n\nlista = ['a', 'b', 'c', 'd']\nlista[0:2] = ['z']\nprint(lista)\n\n¿Cuál será la salida de la impresión tras aplicarse la reasignación?",
+      "opciones": {
+        "a": "['z', 'b', 'c', 'd']",
+        "b": "['z', 'z', 'c', 'd']",
+        "c": "['z', 'c', 'd']"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "Las rebanadas (slices) funcionan en las listas igual que con las cadenas, y también se pueden utilizar para cambiar subpartes de la lista... list[0:2] = 'z' ## replace ['a', 'b'] with ['z']",
+        "razon_respuesta_correcta": "La rebanada lista[0:2] extrae los elementos en los índices 0 y 1 (es decir, 'a' y 'b'). La asignación sustituye esa sublista completa por el nuevo elemento ['z']. Al reemplazar dos elementos por uno solo, la lista se acorta, quedando como ['z', 'c', 'd'].",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Modificación de la longitud y contenido de una lista mediante asignación directa sobre rangos (slicing).",
+        "error_comun_evaluado": "Creer que la sustitución por rebanadas obliga a reemplazar elementos de uno en uno (1 a 1), manteniendo siempre fija la longitud de la lista original.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Un fallo de cálculo off-by-one donde se cree erróneamente que lista[0:2] extrae y sustituye únicamente el índice 0."
+          },
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume erróneamente que, al pasar un único elemento para sustituir un rango de dos, Python automáticamente duplica o 'rellena' el elemento para encajar en el tamaño del hueco previo."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Manejo de Errores en Búsqueda",
+      "dificultad": "Media",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Considerando las recomendaciones del documento sobre las funciones de lista integradas, ¿qué sucederá al ejecutar este bloque?\n\nnombres = ['Ana', 'Luis', 'Pedro']\nindice = nombres.index('Marta')\nprint(indice)",
+      "opciones": {
+        "a": "Lanza una excepción ValueError que detiene el flujo al no estar el elemento presente en la estructura.",
+        "b": "Imprime en consola un valor de -1, indicando numéricamente la ausencia del elemento buscado.",
+        "c": "Retorna silenciosamente el valor de tipo None y la variable queda vacía sin emitir errores."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "list.index(elem) — busca el elemento dado desde el inicio de la lista y devuelve su índice. Lanza un ValueError si el elemento no aparece (usa \"in\" para verificar sin generar un ValueError).",
+        "razon_respuesta_correcta": "A diferencia de algunos lenguajes o métodos de cadenas que devuelven -1, en Python tanto el método index() como remove() lanzan explícitamente un ValueError y abortan el programa si no encuentran el elemento pasado por parámetro.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Comportamiento del motor frente a ausencias en métodos de búsqueda posicional y mutación por coincidencia.",
+        "error_comun_evaluado": "Aplicar lógicas de otros lenguajes de programación (como JavaScript o C#) donde las funciones de indexado devuelven un número negativo en lugar de arrojar una excepción formal.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Fallo muy habitual arrastrado del método .find() de los strings o de otros lenguajes de programación (como .indexOf() en JS), asumiendo el clásico retorno de -1 en lugar de la detención."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "El estudiante confunde la gestión de este método con otras funciones más tolerantes como dict.get(), esperando una salida silenciada con el tipo de dato nulo (None)."
+          }
+        }
+      }
+    }
+  ]
+}

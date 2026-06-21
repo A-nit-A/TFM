@@ -1,0 +1,236 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python (Python 3)",
+        "fuente": "Texto proporcionado",
+        "motivo_reduccion": "",
+        "distribucion_tematica": [
+            {
+                "tema": "Asignación por referencia (no copia)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Métodos de lista que no devuelven valor",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Rebanadas (slices) con asignación",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Bucle for/in con acumulación",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Método extend() frente a append()",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 1,
+            "d": 1
+        },
+        "distribucion_dificultad": {
+            "Media": 2,
+            "Alta": 3
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Asignación por referencia (no copia)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\ncolors = ['red', 'blue', 'green']\nb = colors\nb[0] = 'yellow'\nprint(colors[0])\n```",
+            "opciones": {
+                "a": "'red'",
+                "b": "'blue'",
+                "c": "'yellow'",
+                "d": "Se lanza un IndexError porque la lista original ha sido modificada"
+            },
+            "justificacion_4_opciones": "La asignación de listas en Python admite cuatro interpretaciones erróneas naturales según el modelo mental del estudiante sobre si '=' copia la lista, si modifica solo la variable destino, si propaga los cambios a la original, o si invalida la lista original. Cada distractor refleja un modelo mental distinto sobre la semántica de la asignación en Python.",
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento establece explícitamente: 'La asignación con un = en las listas no realiza una copia. En su lugar, la asignación hace que las dos variables apunten a la misma lista en memoria', y muestra el ejemplo `b = colors  ## Does not copy the list`.",
+                "razon_respuesta_correcta": "Al ejecutar `b = colors`, ambas variables apuntan a la misma lista en memoria. Cuando se modifica `b[0] = 'yellow'`, el cambio afecta a la lista compartida, por lo que `colors[0]` también refleja el valor 'yellow'.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Asignación por referencia en listas: '=' no copia, sino que comparte el objeto en memoria",
+                "error_comun_evaluado": "Asumir que la asignación con '=' crea una copia independiente de la lista, como ocurre en otros lenguajes",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que `b = colors` crea una copia independiente, por lo que modificar `b` no afecta a `colors`. Es el error más frecuente en estudiantes que vienen de otros lenguajes."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Confunde el índice modificado (0) con otro índice (1), mostrando el valor original de la posición 1 en lugar de evaluar correctamente el efecto de la asignación."
+                    },
+                    "d": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que modificar una variable 'alias' invalida o corrompe la lista original, cuando en realidad ambas variables siguen siendo válidas y apuntan al mismo objeto."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Métodos de lista que no devuelven valor",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "El siguiente código debería crear una lista con el elemento 4 añadido, pero no funciona como se espera. ¿Qué imprime realmente?\n\n```python\nlist = [1, 2, 3]\nresult = list.append(4)\nprint(result)\n```",
+            "opciones": {
+                "a": "None",
+                "b": "[1, 2, 3, 4]",
+                "c": "4",
+                "d": "Se lanza un TypeError porque append() no puede asignarse a una variable"
+            },
+            "justificacion_4_opciones": "El comportamiento de los métodos de lista que modifican in situ admite cuatro interpretaciones erróneas naturales: devolver None, devolver la lista modificada, devolver el elemento añadido, o lanzar un error. Cada distractor refleja una confusión real sobre la semántica de retorno de los métodos mutadores de listas en Python.",
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento advierte explícitamente: 'Error común: ten en cuenta que los métodos anteriores no *devuelven* la lista modificada, simplemente modifican la lista original'. Muestra el ejemplo: `print(list.append(4))   ## NO, does not work, append() returns None`.",
+                "razon_respuesta_correcta": "El método append() modifica la lista original añadiendo el elemento al final, pero no devuelve nada (devuelve None). Por tanto, `result` almacena None, que es lo que se imprime. La lista sí queda modificada como [1, 2, 3, 4], pero ese valor no se captura en la variable result.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Métodos de lista que modifican in situ no devuelven la lista, sino None",
+                "error_comun_evaluado": "Asumir que append() devuelve la lista modificada, permitiendo encadenar operaciones o capturar el resultado",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que append() devuelve la lista modificada, como si fuera una función pura que retorna un nuevo valor. Es el error más frecuente y el que el documento destaca explícitamente."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que append() devuelve el elemento que se acaba de añadir, confundiendo el valor del argumento con el valor de retorno del método."
+                    },
+                    "d": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Asume que Python no permite asignar el resultado de un método a una variable, cuando en realidad cualquier expresión (incluyendo llamadas a métodos que devuelven None) puede asignarse."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Rebanadas (slices) con asignación",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nlist = ['a', 'b', 'c', 'd']\nlist[0:2] = 'z'\nprint(list)\n```",
+            "opciones": {
+                "a": "['z', 'b', 'c', 'd']",
+                "b": "['z', 'c', 'd']",
+                "c": "['z', 'z', 'c', 'd']"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que 'las rebanadas (slices) funcionan en las listas igual que con las cadenas, y también se pueden utilizar para cambiar subpartes de la lista', y muestra el ejemplo exacto: `list[0:2] = 'z'    ## replace ['a', 'b'] with ['z']` con resultado `['z', 'c', 'd']`.",
+                "razon_respuesta_correcta": "La rebanada `list[0:2]` selecciona los elementos en las posiciones 0 y 1 ('a' y 'b'). Al asignar la cadena 'z' a esa rebanada, se reemplazan ambos elementos por los caracteres de la cadena. Como 'z' tiene un solo carácter, la lista resultante es ['z', 'c', 'd'].",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Asignación a rebanadas de listas: reemplazo de subpartes con secuencias de longitud diferente",
+                "error_comun_evaluado": "Confundir cómo Python trata la cadena 'z' al asignarla a una rebanada de dos elementos, asumiendo que se expande o que solo reemplaza el primer elemento",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que la asignación a una rebanada solo reemplaza el primer elemento de la rebanada, conservando el segundo ('b'). En realidad, toda la rebanada se sustituye por el contenido de la secuencia asignada."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Asume que la cadena 'z' se replica para coincidir con la longitud de la rebanada (2 elementos), produciendo ['z', 'z']. En realidad, Python itera sobre la cadena 'z' (un solo carácter) y reemplaza la rebanada con esos elementos."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Bucle for/in con acumulación",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nsquares = [1, 4, 9, 16]\nsum = 0\nfor num in squares:\n    sum += num\nprint(sum)\n```",
+            "opciones": {
+                "a": "10",
+                "b": "4",
+                "c": "16",
+                "d": "30"
+            },
+            "justificacion_4_opciones": "El bucle for/in con acumulación admite cuatro interpretaciones erróneas naturales según qué valore el estudiante está sumando: los índices (0+1+2+3=6, no 10, pero podría confundirse), el número de elementos, el último elemento, o la suma correcta de todos los valores. Cada distractor refleja una confusión real sobre qué se está acumulando en el bucle.",
+            "respuesta_correcta": "d",
+            "justificacion": {
+                "evidencia_documental": "El documento muestra el ejemplo exacto de acumulación con for/in: `squares = [1, 4, 9, 16]` con el bucle `for num in squares: sum += num` que produce `print(sum)  ## 30`.",
+                "razon_respuesta_correcta": "El bucle itera sobre cada elemento de la lista squares (1, 4, 9, 16) y los va acumulando en la variable sum. La suma total es 1 + 4 + 9 + 16 = 30.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Patrón de acumulación con for/in: iterar sobre elementos y sumar sus valores",
+                "error_comun_evaluado": "Confundir qué se está acumulando: los valores de los elementos, sus índices, el número de iteraciones o el último valor",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Suma los índices de la lista (0+1+2+3=6) o confunde la suma con otro cálculo. Podría reflejar un intento de sumar posiciones en lugar de valores, aunque el resultado 10 no corresponde exactamente a ninguna suma de índices."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Devuelve el número de elementos de la lista (4), como si el bucle contara iteraciones en lugar de acumular valores."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Devuelve el último elemento de la lista (16), como si el bucle solo conservara el valor de la última iteración en lugar de acumular todos."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Método extend() frente a append()",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nlist = ['a', 'b']\nlist.extend(['c', 'd'])\nprint(len(list))\n```",
+            "opciones": {
+                "a": "4",
+                "b": "3",
+                "c": "2"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento define `list.extend(list2)` como el método que 'añade los elementos de list2 al final de la lista', diferenciándolo de append que 'añade un único elemento al final de la lista'. Muestra el ejemplo: `list.extend(['yyy', 'zzz'])  ## add list of elems at end`.",
+                "razon_respuesta_correcta": "El método extend() recibe una lista ['c', 'd'] y añade cada uno de sus elementos individualmente al final de la lista original. La lista pasa de ['a', 'b'] a ['a', 'b', 'c', 'd'], que tiene 4 elementos. Por tanto, len(list) devuelve 4.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Diferencia entre extend() (añade elementos individuales de una lista) y append() (añade un único elemento)",
+                "error_comun_evaluado": "Confundir extend() con append(), asumiendo que la lista completa se añade como un solo elemento",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde extend() con append(), asumiendo que la lista ['c', 'd'] se añade como un único elemento, resultando en ['a', 'b', ['c', 'd']] con longitud 3. En realidad, extend() desempaqueta la lista y añade cada elemento por separado."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que extend() no tiene efecto o que len() sigue contando solo los elementos originales, ignorando que extend() sí modifica la lista añadiendo todos los elementos de la lista argumento."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        }
+    ]
+}

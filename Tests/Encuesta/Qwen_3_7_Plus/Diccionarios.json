@@ -1,0 +1,236 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python (Python 3)",
+        "fuente": "Texto proporcionado",
+        "motivo_reduccion": "",
+        "distribucion_tematica": [
+            {
+                "tema": "Acceso seguro a diccionarios (get vs [])",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Iteración sobre diccionarios (items, keys, values)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Eliminación con el operador del",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Lectura eficiente de archivos",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Archivos Unicode y codificación",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 1,
+            "b": 2,
+            "c": 1,
+            "d": 1
+        },
+        "distribucion_dificultad": {
+            "Media": 3,
+            "Alta": 2
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Acceso seguro a diccionarios (get vs [])",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nd = {'a': 1, 'b': 2}\nprint(d.get('c', 0))\n```",
+            "opciones": {
+                "a": "Se lanza un KeyError porque 'c' no está en el diccionario",
+                "b": "0",
+                "c": "None"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que buscar una clave inexistente con corchetes lanza un KeyError, pero `dict.get(key)` devuelve None si la clave no está presente, y `get(key, not-found)` permite especificar qué valor devolver en caso de no encontrarse.",
+                "razon_respuesta_correcta": "La llamada `d.get('c', 0)` busca la clave 'c', que no existe en el diccionario, por lo que devuelve el valor por defecto especificado como segundo argumento: 0.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Método get() con valor por defecto para evitar KeyError",
+                "error_comun_evaluado": "Confundir el comportamiento de get() con el acceso directo mediante corchetes, o ignorar el segundo argumento de get()",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde `d.get('c', 0)` con `d['c']`. Solo el acceso directo con corchetes lanza KeyError cuando la clave no existe; get() está diseñado precisamente para evitarlo."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Conoce que get() devuelve None cuando la clave no existe, pero ignora que el segundo argumento (0) sobrescribe ese valor por defecto."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Iteración sobre diccionarios (items, keys, values)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nd = {'x': 10, 'y': 20}\nfor k, v in d.items():\n    print(k, v)\n```",
+            "opciones": {
+                "a": "x y",
+                "b": "10 20",
+                "c": "x 10\ny 20",
+                "d": "('x', 10) ('y', 20)"
+            },
+            "justificacion_4_opciones": "El método items() y su uso en bucles for con desempaqueta-do admite cuatro interpretaciones erróneas naturales: imprimir solo claves, solo valores, tuplas completas como objetos, o confundir el desempaqueta-do. Cada distractor representa una confusión real sobre cómo items() expone los datos del diccionario.",
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento indica que `.items()` devuelve una lista de tuplas (clave, valor) y muestra el bucle `for k, v in dict.items(): print(k, '>', v)` que accede a cada par clave-valor desempaque-tando la tupla en dos variables.",
+                "razon_respuesta_correcta": "`d.items()` devuelve las tuplas `('x', 10)` e `('y', 20)`. El bucle las desempaqueta en `k` y `v`, y `print(k, v)` imprime cada par separado por un espacio en una línea distinta, produciendo `x 10` e `y 20` en líneas separadas.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Desempaquetado de tuplas (clave, valor) al iterar con items()",
+                "error_comun_evaluado": "Confundir qué devuelve items() o cómo se desempaqueta en el bucle for",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que items() solo devuelve las claves, como si fuera equivalente a keys(), ignorando los valores."
+                    },
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que items() solo devuelve los valores, como si fuera equivalente a values(), ignorando las claves."
+                    },
+                    "d": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Imprime las tuplas completas sin desempaqueta-r, como si el bucle fuera `for t in d.items(): print(t)` en lugar de usar `k, v`."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Eliminación con el operador del",
+            "dificultad": "Media",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```python\nd = {'a': 1, 'b': 2, 'c': 3}\ndel d['b']\nprint(len(d))\n```",
+            "opciones": {
+                "a": "2",
+                "b": "3",
+                "c": "Se lanza un KeyError porque 'b' ya no existe"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que `del` puede usarse para eliminar entradas de un diccionario, mostrando el ejemplo `del dict['b']` que elimina la entrada con clave 'b', y que `len()` aplicado a un diccionario devuelve su número de elementos.",
+                "razon_respuesta_correcta": "El diccionario inicial tiene 3 entradas. Tras `del d['b']`, se elimina la entrada con clave 'b', quedando solo 'a' y 'c'. Por tanto, `len(d)` devuelve 2.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Efecto del operador del sobre las entradas de un diccionario y su relación con len()",
+                "error_comun_evaluado": "Asumir que del no afecta al diccionario o que len() cuenta las claves eliminadas",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que `del d['b']` no elimina realmente la entrada del diccionario, o que len() sigue contando 3 elementos como si la eliminación no tuviera efecto."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Confunde el momento de la eliminación: `del d['b']` se ejecuta correctamente la primera vez y elimina la entrada. El KeyError solo ocurriría si se intentara acceder a 'b' después de eliminarlo."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Lectura eficiente de archivos",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Cuál es la principal ventaja del siguiente enfoque frente a usar `f.readlines()` para procesar un archivo de texto de gran tamaño?\n\n```python\nwith open('datos.txt', 'rt', encoding='utf-8') as f:\n    for linea in f:\n        procesar(linea)\n```",
+            "opciones": {
+                "a": "Permite leer archivos binarios, no solo de texto",
+                "b": "Es más rápido porque lee todo el archivo de una sola vez en memoria",
+                "c": "Cierra automáticamente el archivo al terminar el bucle, algo que readlines() no hace",
+                "d": "No requiere cargar todo el archivo en memoria, ya que procesa línea a línea"
+            },
+            "justificacion_4_opciones": "La comparación entre iteración línea a línea y readlines() admite cuatro confusiones frecuentes del alumnado: modos de apertura (binario vs texto), velocidad de carga, gestión del cierre del archivo y consumo de memoria. Cada distractor refleja una creencia errónea habitual sobre las ventajas reales de cada enfoque.",
+            "respuesta_correcta": "d",
+            "justificacion": {
+                "evidencia_documental": "El documento afirma explícitamente: \"Leer una línea a la vez tiene la excelente cualidad de que no todo el archivo necesita caber en la memoria al mismo tiempo; es muy útil si deseas examinar cada línea de un archivo de 10 gigabytes sin utilizar 10 gigabytes de memoria\". En cambio, `f.readlines()` \"lee todo el archivo en la memoria y devuelve su contenido como una lista de sus líneas\".",
+                "razon_respuesta_correcta": "Iterar directamente sobre el manejador del archivo (`for linea in f`) lee una línea cada vez, manteniendo en memoria solo la línea actual. Esto es crucial para archivos grandes, donde `readlines()` cargaría todas las líneas simultáneamente, pudiendo agotar la memoria.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Ventaja de la lectura perezosa (línea a línea) frente a la carga completa en memoria",
+                "error_comun_evaluado": "Confundir las ventajas de rendimiento con otras características como el cierre automático o los modos de apertura",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "El modo 'rt' indica explícitamente texto. Ni este enfoque ni readlines() están pensados para archivos binarios; para eso se usaría el modo 'rb'."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Es exactamente lo contrario: la ventaja es que NO lee todo de una vez. readlines() sí carga todo el archivo en memoria, lo cual es una desventaja para archivos grandes."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "El cierre automático lo proporciona el contexto `with`, no el bucle for en sí. readlines() también puede usarse dentro de un `with`, por lo que esta no es la ventaja diferencial del enfoque."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Archivos Unicode y codificación",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué ocurre al ejecutar el siguiente código?\n\n```python\nwith open('test.txt', 'wt', encoding='utf-8') as f:\n    f.write('\\u20AC100')\n```",
+            "opciones": {
+                "a": "Escribe la cadena literal \"\\u20AC100\" en el archivo, sin interpretar la secuencia de escape",
+                "b": "Escribe el símbolo del euro (€) seguido de \"100\" en el archivo, codificado en UTF-8",
+                "c": "Lanza un UnicodeDecodeError porque el modo 'wt' no admite cadenas Unicode",
+                "d": "Escribe únicamente \"100\", ignorando la secuencia \\u20AC por considerarla inválida"
+            },
+            "justificacion_4_opciones": "El manejo de secuencias de escape Unicode en archivos admite cuatro interpretaciones erróneas naturales: tratar la secuencia como texto literal, asumir que el modo de escritura no soporta Unicode, pensar que se ignora la secuencia inválida, o interpretar correctamente la secuencia como el carácter Unicode correspondiente. Cada distractor refleja una confusión real sobre cómo Python gestiona Unicode al escribir archivos.",
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento muestra el ejemplo `f.write('\\u20ACunicode\\u20AC\\n')` que produce `€unicode€` en el archivo, y explica que para leer y escribir archivos codificados en Unicode se utiliza el modo 't' especificando explícitamente una codificación como `encoding='utf-8'`.",
+                "razon_respuesta_correcta": "La secuencia `\\u20AC` es la representación Unicode del símbolo del euro (€). Al usar `encoding='utf-8'` en la apertura del archivo, Python codifica correctamente el carácter y escribe \"€100\" en el archivo.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Interpretación de secuencias de escape Unicode y codificación UTF-8 en archivos",
+                "error_comun_evaluado": "No reconocer las secuencias de escape Unicode o asumir que el modo de escritura no las soporta",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde una cadena con secuencias de escape (que Python interpreta al crearla) con una cadena cruda (raw string con prefijo 'r'), que sí trataría la secuencia como texto literal."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que el modo 'wt' es incompatible con Unicode, cuando en realidad es el modo recomendado para escribir texto Unicode, siempre que se especifique la codificación."
+                    },
+                    "d": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Asume que Python ignora silenciosamente las secuencias de escape que considera inválidas, cuando en realidad \\u20AC es una secuencia válida y se interpreta correctamente."
+                    }
+                },
+                "validacion_tecnica": {
+                    "codigo_ejecutado_mentalmente": true,
+                    "nivel_confianza": "alto",
+                    "observaciones": ""
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,196 @@
+{
+  "_espacio_de_trabajo_interno": {
+    "plan_tematico": "Q1 evalúa el comportamiento codicioso (greedy) del operador '+' y la estrategia 'leftmost'. Q2 evalúa la estructura de datos que devuelve findall() al trabajar con múltiples grupos. Q3 evalúa la resolución de problemas de captura excesiva mediante modificadores no codiciosos (*?). Q4 evalúa el control de flujo con el retorno None de re.search y los anclajes de inicio (^). Q5 evalúa el conocimiento sobre banderas de opción (re.DOTALL vs re.MULTILINE).",
+    "plan_dificultad": "Se diseñaron 5 preguntas de seguimiento y análisis lógico de patrones y flujos. Nivel puramente Medio y Alto (aplicación e inferencia); cero preguntas memorísticas.",
+    "plan_distribucion_respuestas": "Asignación: A para Q3; B para Q1 y Q2; C para Q4 y Q5. Total: A=1 (20%), B=2 (40%), C=2 (40%). D=0 (solo funciona como distractor en Q4). La regla de balance del 40% se cumple estrictamente.",
+    "auditoria_final": "Ningún bloque markdown triple-tilde se ha utilizado en el interior. Todas las dobles comillas en código están escapadas. La sintaxis de los regex es válida en Python y se han empleado crudos (raw strings) donde es necesario. Q4 usa 4 distractores porque el error AttributeError en sentencias if al evaluar 'None' es uno de los fallos teóricos más extendidos en estudiantes."
+  },
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python",
+    "fuente": "Texto proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Repetición y Codicia (Greedy)",
+        "num_preguntas": 2
+      },
+      {
+        "tema": "Grupos y findall()",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Patrones Básicos y Control de Flujo",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Opciones de Modificación",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 1,
+      "b": 2,
+      "c": 2,
+      "d": 0
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Repetición y Codicia (Greedy)",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Analiza el siguiente fragmento de código:\n\nimport re\ntexto = \"piigiiii\"\nmatch = re.search(r'i+', texto)\nprint(match.group())\n\n¿Qué imprimirá exactamente en la consola al ejecutarse?",
+      "opciones": {
+        "a": "\"i\"",
+        "b": "\"ii\"",
+        "c": "\"iiii\""
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "En primer lugar, la búsqueda encuentra la coincidencia más a la izquierda para el patrón y, en segundo lugar, intenta consumir la mayor cantidad posible de la cadena; es decir, + y * van tan lejos como sea posible... match = re.search(r'i+', 'piigiiii') # found, match.group() == \"ii\"",
+        "razon_respuesta_correcta": "El motor de expresiones regulares busca la primera ocurrencia de izquierda a derecha (leftmost). La primera 'i' aparece después de la 'p'. Al usar el operador '+' (codicioso), consume la mayor cantidad de 'i's consecutivas posibles en ese punto, deteniéndose al encontrar la 'g', lo que da como resultado 'ii'.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Comportamiento codicioso (greedy) del operador '+' de izquierda a derecha.",
+        "error_comun_evaluado": "Asumir que buscará el bloque de caracteres más largo de toda la cadena en lugar de detenerse en la primera coincidencia que satisfaga el patrón.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Ignora el efecto del operador '+', actuando como si el patrón fuera simplemente buscar la primera letra 'i' solitaria."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "El estudiante confunde la regla 'leftmost' (más a la izquierda) priorizando erróneamente la cadena de mayor longitud ('iiii' al final)."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Grupos y findall()",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Revisa el código que procesa información empleando la función findall():\n\nimport re\ntexto = \"user1@abc.com y user2@xyz.com\"\nresultados = re.findall(r'([\\w.-]+)@([\\w.-]+)', texto)\nprint(resultados[0])\n\n¿Qué estructura de datos se imprimirá al ejecutar la última línea?",
+      "opciones": {
+        "a": "Una lista de cadenas de texto que agrupa las coincidencias completas.",
+        "b": "Una tupla posicional que agrupa el nombre de usuario y el host extraídos.",
+        "c": "Una cadena de texto plana correspondiente al primer grupo de la primera dirección."
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "El mecanismo de grupo de paréntesis ( ) se puede combinar con findall(). Si el patrón incluye 2 o más grupos de paréntesis, entonces en lugar de devolver una lista de cadenas, findall() devuelve una lista de *tuplas*.",
+        "razon_respuesta_correcta": "Al contener el patrón múltiples grupos definidos con paréntesis (usuario y dominio), findall() altera su comportamiento habitual devolviendo una lista de tuplas. La indexación resultados[0] extrae el primer elemento de esta lista, que es estrictamente la tupla ('user1', 'abc.com').",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Alteración del tipo de retorno en re.findall() cuando interactúa con múltiples grupos de captura.",
+        "error_comun_evaluado": "Desconocer que findall() cambia la estructura de los datos devueltos de 'lista de strings' a 'lista de tuplas' cuando se emplean paréntesis múltiples.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Confunde el comportamiento estándar de findall() sin grupos (o con un solo grupo) con el comportamiento de agrupaciones múltiples."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume incorrectamente que los índices de la lista resultado se limitan a separar los elementos internos de una coincidencia única, en lugar de separar coincidencias globales."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Repetición y Codicia (Greedy)",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Un script intenta extraer etiquetas HTML individuales con este código:\n\nmatch = re.search(r'(<.*>)', '<b>texto</b> y <i>mas</i>')\n\nObservas que captura toda la cadena completa de un solo golpe. Según el documento, ¿qué modificación debes aplicar en el patrón para que capture únicamente la etiqueta '<b>' aislada?",
+      "opciones": {
+        "a": "Cambiar el patrón a r'(<.*?>)' para activar la coincidencia no codiciosa (non-greedy).",
+        "b": "Sustituir el punto por el metacarácter inverso en el patrón r'(<\\W*>)' para acotar.",
+        "c": "Añadir la opción de extensión PCRE a la función para habilitar el motor moderno."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "Existe una extensión para las expresiones regulares en la que se añade un ? al final, como .*? o .+?, cambiándolos a no codiciosos. Ahora se detienen tan pronto como pueden. Así, el patrón '(<.*?>)' obtendrá solo '<b>' como la primera coincidencia...",
+        "razon_respuesta_correcta": "El operador '*' es codicioso y avanza hasta el último '>' posible de la cadena. Al añadir '?', la expresión '.*?' se vuelve no codiciosa (non-greedy), obligando al motor a detenerse en el primer '>' que encuentre, resolviendo el problema de exceso de captura.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Inversión de la codicia de los operadores de repetición mediante el sufijo de interrogación.",
+        "error_comun_evaluado": "Desconocimiento del patrón de truncado no codicioso (non-greedy) y uso erróneo de clases de caracteres para intentar forzar límites.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "El metacarácter \\W detecta caracteres que no son de palabra, lo cual fallaría con la letra 'b' dentro de la etiqueta."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Aunque la sintaxis *? se originó en PCRE, Python ya la incorpora por defecto sin necesidad de pasar ninguna 'opción de extensión' mediante banderas adicionales."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Patrones Básicos y Control de Flujo",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Analiza la siguiente evaluación condicional:\n\nimport re\nmatch = re.search(r'^b\\w+', 'foobar')\nif match:\n\tprint(\"Encontrado\")\nelse:\n\tprint(\"Vacío\")\n\n¿Qué resultado producirá la ejecución de este bloque?",
+      "opciones": {
+        "a": "Imprimirá \"Encontrado\" porque la subcadena 'bar' de la variable coincide y el motor prioriza esa porción.",
+        "b": "Lanzará una excepción (Error) porque la variable 'match' es de tipo None y la estructura 'if' exige un valor booleano o de longitud.",
+        "c": "Imprimirá \"Vacío\" porque el carácter '^' obliga a que el patrón coincida forzosamente desde el primer carácter de la cadena global.",
+        "d": "Imprimirá \"Vacío\" porque la secuencia de escape '\\w+' rechaza las letras del alfabeto asumiendo sólo dígitos."
+      },
+      "justificacion_4_opciones": "La presencia de 4 opciones se justifica por la inclusión de distractores de alta calidad que mapean errores habituales: ignorar el anclaje ^, desconocer la evaluación booleana implícita de 'None' en Python (lanzando supuestas excepciones), y confundir \\w con \\d.",
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "^ = inicio, $ = fin -- coinciden con el inicio o el final de la cadena... match = re.search(r'^b\\w+', 'foobar') # not found, match == None",
+        "razon_respuesta_correcta": "El ancla '^' exige que la 'b' aparezca exactamente al inicio del texto. Como 'foobar' empieza por 'f', re.search() fracasa y devuelve None. En Python, 'if None:' se evalúa legal y pacíficamente como False, ejecutando el bloque else e imprimiendo 'Vacío'.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Combinación del comportamiento de anclaje posicional (^) y la evaluación booleana de retornos de fallo (None).",
+        "error_comun_evaluado": "Ignorar el ancla de inicio y creer que evaluar None en un if rompe la ejecución del script por un error de tipado.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Ignora la función del operador '^' asumiendo que el buscador actuará en modo de desplazamiento libre por toda la palabra."
+          },
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Falso positivo común: creer que NoneType genera un TypeError al ser evaluado condicionalmente en un if (Python lo considera lógicamente falso)."
+          },
+          "d": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Confusión memorística habitual de secuencias de escape, asumiendo que \\w restringe alfanuméricos cuando esa es la labor de \\d."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Opciones de Modificación",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "Al trabajar con una variable de texto con múltiples saltos de línea, notas que el patrón '.*' se detiene al final de la primera línea sin capturar el bloque completo. Según el documento, ¿qué bandera de opción debes proporcionar a re.search() para solucionarlo?",
+      "opciones": {
+        "a": "re.MULTILINE, ya que desactiva explícitamente las anclas internas.",
+        "b": "Implementar un patrón basado en el escape '\\s*' porque captura todo tipo de símbolos sin excepción.",
+        "c": "re.DOTALL, para autorizar que el metacarácter punto (.) coincida también con los caracteres de salto de línea."
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "DOTALL -- permite que el punto (.) coincida con el salto de línea (normalmente coincide con cualquier cosa excepto con el salto de línea). Esto puede confundirte: crees que .* coincide con todo, pero por defecto no va más allá del final de una línea.",
+        "razon_respuesta_correcta": "Por defecto, el metacarácter '.' empareja cualquier cosa excepto '\\n'. Para que '.*' engulla un texto que contiene retornos de carro, es imprescindible inyectar la opción re.DOTALL.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Modificación del comportamiento del metacarácter universal a través de la bandera DOTALL.",
+        "error_comun_evaluado": "Confundir el comportamiento de re.MULTILINE con re.DOTALL ante problemas de bloque de texto.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "La opción re.MULTILINE afecta cómo actúan los anclajes de línea (^ y $), pero no permite que el punto trague saltos de línea."
+          },
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Sustituir el patrón por \\s* sólo capturaría la secuencia de espacios y saltos de línea, ignorando letras, números y el resto de la información útil."
+          }
+        }
+      }
+    }
+  ]
+}

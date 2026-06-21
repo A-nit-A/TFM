@@ -1,0 +1,196 @@
+{
+  "_espacio_de_trabajo_interno": {
+    "plan_tematico": "Q1 evalúa el comportamiento de 'os.listdir()' y el formato de los nombres devueltos. Q2 evalúa la redirección de flujos estándar y de error en 'subprocess.check_output()'. Q3 evalúa el mapeo de objetos en la sintaxis 'except ... as'. Q4 evalúa la comprensión de redirecciones web a través del método 'geturl()'. Q5 evalúa la selección óptima de funciones de subprocesos cuando no se requiere la salida de texto.",
+    "plan_dificultad": "Solo se incluyen niveles Medio y Alto. Las preguntas exigen análisis de fragmentos de código, comprensión de flujos del sistema operativo y predicción de salidas. Ninguna se basa en el mero recuerdo literal de comandos.",
+    "plan_distribucion_respuestas": "Asignación proyectada: A para Q3 y Q5; B para Q2 y Q4; C para Q1. Totales: A=2 (40%), B=2 (40%), C=1 (20%). La opción D solo existe como distractor discriminativo en la Q1. Todo en norma y por debajo del umbral máximo.",
+    "auditoria_final": "Los valores del JSON no contienen triples tildes inversas de Markdown. Todos los bloques de código han sido integrados en una sola línea utilizando '\\n' y '\\t'. La Q1 contiene una cuarta opción estrictamente justificada para mapear los distintos errores de comprensión sobre rutas de archivos (absolutas, relativas, tuplas)."
+  },
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python",
+    "fuente": "Texto proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Sistema de Archivos -- os",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Ejecución de Procesos Externos -- subprocess",
+        "num_preguntas": 2
+      },
+      {
+        "tema": "Excepciones",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "HTTP -- urllib",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 2,
+      "b": 2,
+      "c": 1,
+      "d": 0
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Sistema de Archivos -- os",
+      "dificultad": "Media",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Analiza el siguiente bloque de código:\n\nimport os\narchivos = os.listdir('/home/docs')\nprint(archivos[0])\n\nSegún la documentación analizada, ¿qué imprimirá exactamente este código si el directorio solo contiene un archivo llamado 'datos.csv'?",
+      "opciones": {
+        "a": "La ruta relativa calculada desde el script actual, como '../datos.csv'.",
+        "b": "La ruta absoluta construida por el motor, es decir, '/home/docs/datos.csv'.",
+        "c": "Únicamente el nombre base del archivo, es decir, 'datos.csv'.",
+        "d": "Una tupla con el nombre base y la extensión separados: ('datos', '.csv')."
+      },
+      "justificacion_4_opciones": "La extracción de archivos mediante os.listdir() genera cuatro asunciones habituales y plausibles en estudiantes respecto a lo que retorna el sistema: rutas relativas al entorno, rutas absolutas pre-concatenadas, desgloses estructurales (tuplas), o el formato correcto (solo nombre).",
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "filenames = os.listdir(dir) -- lista de nombres de archivos en esa ruta de directorio (sin incluir . y ..). Los nombres de archivos son solo los nombres dentro del directorio, no sus rutas absolutas.",
+        "razon_respuesta_correcta": "El método os.listdir() recupera exclusivamente los nombres literales de los elementos contenidos en la carpeta objetivo. No realiza operaciones de concatenación para crear rutas relativas o absolutas, y tampoco separa la extensión.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Naturaleza de los valores de retorno (nombres simples) en operaciones de exploración de directorios.",
+        "error_comun_evaluado": "Asumir que al pasarle una ruta absoluta a os.listdir(), la función devolverá automáticamente una lista de rutas absolutas utilizables directamente.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Creer erróneamente que el módulo de sistema realiza enrutamientos dinámicos y relativos desde la ubicación del script de ejecución."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Es el fallo más común: suponer que, como se introdujo '/home/docs' en la búsqueda, los elementos saldrán pegados a ese directorio sin necesitar os.path.join()."
+          },
+          "d": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde la funcionalidad básica de listado con utilidades específicas de procesamiento de nombres como os.path.splitext()."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Ejecución de Procesos Externos -- subprocess",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Un script ejecuta la siguiente instrucción de sistema:\n\noutput = subprocess.check_output('ls -l', stderr=subprocess.STDOUT)\n\nSegún el documento, ¿dónde se registrará el texto del error si el comando falla de forma inesperada antes de arrojar una excepción?",
+      "opciones": {
+        "a": "Se captura en una variable aislada o se envía de forma silenciosa al registro del sistema.",
+        "b": "Se combina directamente y pasa a formar parte de la salida de texto único retornada al script.",
+        "c": "Se suprime automáticamente para evitar corromper la salida estándar solicitada."
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "output = subprocess.check_output(cmd, stderr=subprocess.STDOUT) -- ejecuta el comando, espera a que finalice y devuelve su texto de salida. El comando se ejecuta con su salida estándar y error estándar combinados en un único texto de salida.",
+        "razon_respuesta_correcta": "La configuración explícita 'stderr=subprocess.STDOUT' instruye a Python para que fusione el flujo de error estándar (stderr) dentro del flujo de salida estándar (stdout), unificando todo en un solo bloque de texto continuo que luego se evalúa o imprime.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Gestión y redirección de flujos de error y salida en subprocesos del sistema operativo.",
+        "error_comun_evaluado": "Desconocer el efecto de la constante subprocess.STDOUT y pensar que la salida estándar y la de error siempre se mantienen estrictamente aisladas.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Ignora el argumento pasado a la función, creyendo que el error seguirá el cauce predeterminado del registro operativo interno en lugar de ser devuelto a la variable."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "El estudiante asume que la asignación STDOUT sobre stderr actúa como un filtro que silencia los errores para proteger la integridad del output principal."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Excepciones",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "Revisa la siguiente estructura de control de excepciones:\n\ntry:\n\tf = open('datos.txt', 'rb')\nexcept IOError as e:\n\tsys.stderr.write('Fallo de archivo')\n\nDentro de este bloque de código específico, ¿qué dato almacena exactamente la variable 'e'?",
+      "opciones": {
+        "a": "Un puntero directo hacia el objeto de excepción que se acaba de lanzar en memoria.",
+        "b": "El código numérico del error devuelto por el sistema operativo al intentar la lectura.",
+        "c": "El nombre en formato de cadena (string) del archivo que ha provocado la interrupción."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "Puedes obtener un puntero al objeto de excepción en sí con la sintaxis \"except IOError as e: ...\" (donde e apunta al objeto de excepción).",
+        "razon_respuesta_correcta": "La sintaxis 'as [variable]' en un bloque except se utiliza expresamente para asignar (vincular) a dicha variable el objeto completo de la excepción capturada, permitiendo inspeccionar posteriormente sus métodos y atributos internos.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Captura y referenciación de objetos de error en bloques de control de excepciones.",
+        "error_comun_evaluado": "Creer que las excepciones son simples códigos numéricos heredados de sistemas POSIX o meros mensajes de texto, en lugar de objetos orientados a objetos con propiedades.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde el manejo de errores de Python, que está orientado a objetos, con la lógica tradicional de lenguajes como C, donde las funciones arrojan códigos enteros (status codes)."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Supone erróneamente que la variable recoge automáticamente los argumentos problemáticos (en este caso el archivo) en lugar de la propia anomalía de la ejecución."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "HTTP -- urllib",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Un desarrollador llama a 'ufile = urllib.request.urlopen(url_original)' y posteriormente imprime el resultado del método 'ufile.geturl()'. Se da cuenta de que la URL mostrada en consola es diferente a la variable 'url_original'. ¿Por qué ocurre esto según el texto?",
+      "opciones": {
+        "a": "Porque la función trunca por defecto todos los parámetros de seguimiento ('?') de la petición HTTP.",
+        "b": "Porque la URL base resultante devuelta por el servidor puede haber variado a causa de redirecciones.",
+        "c": "Porque el módulo convierte automáticamente cualquier dirección absoluta a un formato relativo acortado."
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "baseurl = ufile.geturl() -- obtiene la URL \"base\" de la solicitud, la cual puede ser diferente de la original debido a redirecciones.",
+        "razon_respuesta_correcta": "Durante una petición HTTP real, el servidor web puede interceptar la solicitud a 'url_original' y enviar al cliente hacia una nueva dirección (redirección 301/302). El método geturl() captura y expone esta URL de destino final.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Efectos del comportamiento de los protocolos HTTP (redirecciones) en los metadatos de las peticiones capturadas.",
+        "error_comun_evaluado": "Asumir que las bibliotecas de red en Python son estructuras estáticas que únicamente devuelven ecos exactos del input (la misma URL inyectada).",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Inventa un mecanismo de truncamiento o limpieza de parámetros (query strings) que el módulo estándar urllib no realiza sin intervención manual del programador."
+          },
+          "c": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Confunde la obtención de rutas HTTP con los métodos de manipulación de rutas locales (como los del módulo os.path), asumiendo un comportamiento de relativización web inexistente."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Ejecución de Procesos Externos -- subprocess",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Un script necesita ejecutar un comando de sistema operativo externo, pero la lógica de tu aplicación no requiere en absoluto capturar su salida de texto en las estructuras de datos de Python; solo te interesa saber si el comando tuvo éxito o falló. ¿Qué función aconseja el documento para este caso específico?",
+      "opciones": {
+        "a": "subprocess.call()",
+        "b": "subprocess.getstatusoutput()",
+        "c": "subprocess.check_output()"
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "También existe un simple subprocess.call(cmd) que ejecuta el comando, vuelca su salida en tu salida y devuelve su código de error. Esto es útil si deseas ejecutar el comando pero no necesitas capturar su salida en tus estructuras de datos de Python.",
+        "razon_respuesta_correcta": "La función subprocess.call() está diseñada específicamente para escenarios donde basta con recibir el código numérico de retorno del sistema operativo (que indica éxito o fallo) sin consumir memoria guardando el texto derivado del proceso.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Selección eficiente de funciones de gestión de subprocesos evaluando el requerimiento de información.",
+        "error_comun_evaluado": "Sobreutilizar rutinas de captura compleja (como check_output) cuando operaciones más simples y ligeras resultan ser la mejor práctica arquitectónica.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Aunque devuelve un código de estado (status), también captura y almacena explícitamente en una variable el output completo (output), contradiciendo el requisito del problema de no capturarlo."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Es la función diametralmente opuesta al objetivo: se detiene a la espera de que el comando finalice y tiene como función principal capturar obligatoriamente todo el texto para el script."
+          }
+        }
+      }
+    }
+  ]
+}

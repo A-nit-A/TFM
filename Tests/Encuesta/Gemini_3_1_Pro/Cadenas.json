@@ -1,0 +1,200 @@
+{
+  "_espacio_de_trabajo_interno": {
+    "plan_tematico": "Q1 evalúa la inmutabilidad y falta de conversión implícita en la concatenación (+). Q2 evalúa el comportamiento de truncado seguro al utilizar índices fuera de rango en rebanadas (slicing). Q3 evalúa la diferencia en el manejo de errores entre métodos de búsqueda (find devuelve -1, no lanza error). Q4 evalúa el concepto de literales de cadena cruda (raw strings) y su longitud. Q5 evalúa el control de flujo con evaluación implícita de cadenas vacías (falsy) y operadores booleanos.",
+    "plan_dificultad": "Solo se incluyen preguntas de nivel Medio (comprensión de flujos y métodos) y Alto (predicción de salidas con escenarios engañosos). Se descartan ítems de reconocimiento literal.",
+    "plan_distribucion_respuestas": "Asignación proyectada: A para Q1; B para Q2 y Q4; C para Q3 y Q5. Totales: A=1 (20%), B=2 (40%), C=2 (40%). D solo existe como distractor en Q2. Se cumple el límite máximo del 40% por opción.",
+    "auditoria_final": "Los valores del JSON no contienen triples tildes inversas. El código se inserta en una línea con '\\n' y '\\t'. La Q2 contiene una justificación de 4 opciones basada en las diferentes formas erróneas de interpretar desbordamientos de memoria/índices en otros lenguajes."
+  },
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python",
+    "fuente": "Texto proporcionado",
+    "distribucion_tematica": [
+      {
+        "tema": "Operadores y Conversión de Tipos",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Rebanadas de cadena (String Slices)",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Métodos de cadena (String Methods)",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Literales y Cadenas Crudas",
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Sentencia If y Booleanos",
+        "num_preguntas": 1
+      }
+    ],
+    "distribucion_respuestas": {
+      "a": 1,
+      "b": 2,
+      "c": 2,
+      "d": 0
+    }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Operadores y Conversión de Tipos",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Analiza el siguiente bloque de código:\n\ntexto = 'Versión '\nversion = 3\nprint(texto + version)\n\n¿Qué ocurrirá al intentar ejecutar esta operación de concatenación?",
+      "opciones": {
+        "a": "Lanza un error de ejecución porque el operador '+' no convierte automáticamente números a cadenas.",
+        "b": "Imprime 'Versión 3' al realizar el intérprete una conversión implícita del tipo numérico.",
+        "c": "Imprime 'Versión ' e ignora la variable numérica para evitar interrumpir el programa."
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "A diferencia de Java, el '+' no convierte automáticamente números u otros tipos a formato de cadena. La función str() convierte valores a un formato de cadena para que puedan combinarse...",
+        "razon_respuesta_correcta": "En Python, no existe la coerción implícita (conversión automática) al concatenar un tipo 'str' con un tipo 'int' usando el operador '+'. Para que funcione, es obligatorio invocar explícitamente str(version), de lo contrario se produce un TypeError.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Ausencia de tipado débil en concatenaciones de distintos tipos de datos básicos.",
+        "error_comun_evaluado": "Asumir comportamientos de otros lenguajes (como JavaScript o Java) donde concatenar un string y un entero convierte implícitamente el número a texto.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "El estudiante arrastra nociones de lenguajes con tipado débil que realizan castings automáticos en operaciones de concatenación mixta."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Inventa un mecanismo de silenciado de errores o tolerancia a fallos que Python, siendo de tipado fuerte, no implementa."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Rebanadas de cadena (String Slices)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Revisa la siguiente operación de rebanado (slicing) sobre una cadena de texto:\n\ns = \"Python\"\nresultado = s[2:100]\nprint(resultado)\n\n¿Cuál será el resultado almacenado en la variable 'resultado'?",
+      "opciones": {
+        "a": "Provoca un error de índice (IndexError) al intentar acceder a posiciones fuera del límite.",
+        "b": "Devuelve 'thon', truncando la lectura de forma automática y segura hasta el final de la cadena.",
+        "c": "Retorna 'thon' rellenando con espacios en blanco las posiciones faltantes hasta alcanzar el índice 100.",
+        "d": "Devuelve la subcadena correcta pero emite un aviso (warning) de desbordamiento en la consola de ejecución."
+      },
+      "justificacion_4_opciones": "El uso de índices desmesurados en una rebanada detona 4 asunciones teóricas clásicas: que el lenguaje aborte por protección de memoria (a), que opere con seguridad truncando (b), que parchee el hueco asignando caracteres vacíos o nulos (c), o que lo permita bajo una advertencia formal (d).",
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "s[1:100] es 'ello' — un índice que es demasiado grande se trunca a la longitud de la cadena.",
+        "razon_respuesta_correcta": "A diferencia del acceso a un índice puntual (ej. s[100]) que lanza un error, el mecanismo de rebanado de Python es tolerante a desbordamientos. Si el límite superior excede la longitud real, simplemente se detiene en el último carácter disponible sin arrojar errores ni generar rellenos.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Tolerancia a índices fuera de rango (out-of-bounds) exclusiva de la sintaxis de rebanado (slicing).",
+        "error_comun_evaluado": "Confundir la estricta gestión de excepciones del indexado directo (que falla ante desbordamientos) con la flexibilidad operativa del slicing.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde el comportamiento de acceso directo s[100], que sí lanza IndexError, con el operador de rango que es seguro."
+          },
+          "c": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Asume que el motor debe satisfacer matemáticamente la demanda de longitud del programador inyectando caracteres nulos o espacios."
+          },
+          "d": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Inventa un sistema de advertencias de compilación/ejecución (warnings) que Python no emite para operaciones de rango validadas como legales."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Métodos de cadena (String Methods)",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "Un script necesita comprobar en qué posición se encuentra un carácter específico dentro de una cadena. Considera este código:\n\npalabra = \"algoritmo\"\nposicion = palabra.find('z')\n\nSegún la documentación, ¿qué valor se asignará a la variable 'posicion'?",
+      "opciones": {
+        "a": "Un valor de tipo 'None' que indica explícitamente la ausencia del carácter buscado.",
+        "b": "Lanza un error de valor (ValueError) que detiene el programa al fallar la búsqueda.",
+        "c": "El número '-1', indicando numéricamente que la búsqueda no ha tenido éxito."
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "s.find('other') — busca la otra cadena dada (no es una expresión regular) dentro de s, y devuelve el primer índice donde comienza, o -1 si no la encuentra.",
+        "razon_respuesta_correcta": "El método .find() de las cadenas en Python está diseñado para retornar el valor entero -1 cuando la subcadena no existe. Esto contrasta con otros métodos integrados (como list.index()) que sí detienen el flujo con excepciones.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Comportamiento del motor de búsqueda de strings de Python ante la ausencia de coincidencias.",
+        "error_comun_evaluado": "Creer que métodos de búsqueda ausentes devuelven objetos nulos (None) o lanzan fallos catastróficos, ignorando el retorno numérico negativo tradicional.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Muchos estudiantes asocian la ausencia de datos en funciones de Python con el tipo 'None' (como hace dict.get), pero .find() no sigue ese patrón."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Confunde .find() con el método .index() de las cadenas o listas, el cual sí lanza explícitamente un ValueError en caso de no encontrar el elemento."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Literales y Cadenas Crudas",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Examina la declaración de la siguiente cadena cruda (raw string):\n\ncruda = r'x\\nx'\nprint(len(cruda))\n\nConsiderando el impacto del prefijo 'r', ¿qué número imprimirá la función len()?",
+      "opciones": {
+        "a": "Imprime 3, porque interpreta la barra invertida y la 'n' consolidadas como un único salto de línea.",
+        "b": "Imprime 4, porque pasa todos los caracteres directamente sin dar tratamiento especial al escape.",
+        "c": "Lanza un error sintáctico porque el prefijo 'r' exige el uso de comillas dobles en la asignación."
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "Un literal de cadena \"cruda\" (raw string) tiene el prefijo 'r' y pasa todos los caracteres directamente sin un tratamiento especial para las barras invertidas, por lo que r'x\\nx' se evalúa como la cadena de longitud 4 'x\\nx'.",
+        "razon_respuesta_correcta": "El prefijo 'r' instruye al analizador léxico de Python a ignorar el significado especial de las barras invertidas (escape). Por lo tanto, '\\n' no se interpreta como un solo carácter invisible de salto de línea, sino como dos caracteres literales distintos: una barra invertida ('\\') y una letra ('n'). La cadena resultante tiene 4 caracteres: 'x', '\\', 'n', 'x'.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Supresión del procesamiento de secuencias de escape en la inicialización de cadenas crudas (raw strings).",
+        "error_comun_evaluado": "Ignorar el prefijo 'r' y calcular la longitud basándose en la resolución de escapes estándar.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Es el resultado lógico si la cadena fuera estándar ('x\\nx'), donde '\\n' computaría como un único carácter (longitud total 3)."
+          },
+          "c": {
+            "tipo_error": "Error sintáctico",
+            "explicacion": "Inventa una restricción de formato inexistente; los prefijos (r, f, b) funcionan indistintamente con comillas simples o dobles."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Sentencia If y Booleanos",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Analiza el siguiente bloque de evaluación condicional:\n\nmensaje = \"\"\nif not mensaje:\n\tprint(\"Aviso vacío\")\nelif mensaje == None:\n\tprint(\"Sin inicializar\")\n\n¿Qué salida producirá este código según las reglas booleanas de Python?",
+      "opciones": {
+        "a": "Imprime 'Sin inicializar' porque una cadena sin caracteres equivale estrictamente al tipo None.",
+        "b": "Lanza un error de sintaxis al no emplear paréntesis alrededor de la condición del primer bloque if.",
+        "c": "Imprime 'Aviso vacío' debido a que la cadena vacía se evalúa implícitamente como un valor falso."
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "Cualquier valor se puede utilizar como una prueba de if. Los valores \"cero\" cuentan todos como falsos: None, 0, cadena vacía... La prueba booleana para un if no necesita estar entre paréntesis (gran diferencia con respecto a C++/Java)...",
+        "razon_respuesta_correcta": "En Python, las colecciones o secuencias vacías (como la cadena \"\") se resuelven de forma implícita como el booleano `False`. Al anteponer el operador 'not', la expresión se invierte a `True`, activando el primer bloque e imprimiendo 'Aviso vacío'.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Evaluación implícita de valores (falsy) y sintaxis limpia de las estructuras de control.",
+        "error_comun_evaluado": "Suponer que sólo el booleano `False` o la ausencia de variable (`None`) no pasan las evaluaciones, descartando las cadenas vacías.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Una cadena vacía (\"\") es un objeto válido de tipo string y residente en memoria; no es equivalente ni idéntico al objeto nulo 'None'."
+          },
+          "b": {
+            "tipo_error": "Error sintáctico",
+            "explicacion": "El estudiante arrastra los requisitos obligatorios de lenguajes con sintaxis estilo C (Java, C++), donde la ausencia de paréntesis en el if rompe la compilación."
+          }
+        }
+      }
+    }
+  ]
+}

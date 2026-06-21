@@ -1,0 +1,210 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado sobre utilidades en Python :contentReference[oaicite:0]{index=0}",
+        "distribucion_tematica": [
+            {
+                "tema": "Sistema de archivos (os, os.path, shutil)",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Subprocess y ejecución de comandos",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Excepciones y manejo de errores",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "HTTP con urllib",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 1,
+            "d": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Sistema de archivos (os, os.path, shutil)",
+            "fragmento_origen": "Construcción de rutas con os.path",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Si `filename` proviene de `os.listdir(dir)`, ¿qué función debe utilizarse para construir correctamente una ruta que combine el directorio y el nombre del archivo antes de obtener su ruta absoluta?",
+            "opciones": {
+                "a": "os.path.join(dir, filename)",
+                "b": "os.path.basename(filename)",
+                "c": "os.path.dirname(filename)"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Los nombres devueltos por os.listdir() no incluyen la ruta; debe utilizarse os.path.join(dir, filename) para formar la ruta.",
+                    "seccion": "Sistema de Archivos — os, os.path, shutil :contentReference[oaicite:1]{index=1}"
+                },
+                "razon_respuesta_correcta": "join() combina correctamente el directorio y el nombre del archivo para producir una ruta válida.",
+                "concepto_principal": "Construcción de rutas",
+                "error_comun_evaluado": "Confundir funciones de composición de rutas con funciones de extracción de componentes.",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "basename() extrae el nombre base de una ruta, no construye una nueva."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "dirname() devuelve la parte de directorio de una ruta existente."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Sistema de archivos (os, os.path, shutil)",
+            "fragmento_origen": "Creación de directorios",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Necesitas crear una ruta cuyos directorios intermedios todavía no existen. Según el documento, ¿qué función está diseñada específicamente para crear todos los directorios necesarios de la ruta?",
+            "opciones": {
+                "a": "os.mkdir(path)",
+                "b": "os.makedirs(path)",
+                "c": "shutil.copy(path)"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "os.mkdir() crea un directorio, mientras que os.makedirs() crea todos los directorios necesarios en la ruta.",
+                    "seccion": "Sistema de Archivos — os, os.path, shutil :contentReference[oaicite:2]{index=2}"
+                },
+                "razon_respuesta_correcta": "makedirs() está orientada a crear estructuras completas de directorios cuando faltan niveles intermedios.",
+                "concepto_principal": "Creación recursiva de directorios",
+                "error_comun_evaluado": "Asumir que mkdir() crea automáticamente toda la jerarquía.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "mkdir() crea un único directorio."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "copy() copia archivos; no crea estructuras de directorios."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Subprocess y ejecución de comandos",
+            "fragmento_origen": "Captura de salida de procesos externos",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué característica distingue a `subprocess.check_output(cmd, stderr=subprocess.STDOUT)` del uso descrito para `subprocess.call(cmd)`?",
+            "opciones": {
+                "a": "Devuelve únicamente el código de salida del proceso.",
+                "b": "Captura y devuelve el texto de salida del comando una vez finalizado.",
+                "c": "Ejecuta exclusivamente comandos del sistema de archivos.",
+                "d": "Evita que se produzcan excepciones cuando el comando falla."
+            },
+            "justificacion_4_opciones": "Existen cuatro interpretaciones plausibles sobre la ejecución de procesos: devolver código de salida, capturar texto, limitar el tipo de comandos o gestionar errores automáticamente. Cada una representa una comprensión distinta del módulo subprocess.",
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "check_output() ejecuta el comando, espera a que termine y devuelve su texto de salida.",
+                    "seccion": "Ejecución de Procesos Externos — subprocess :contentReference[oaicite:3]{index=3}"
+                },
+                "razon_respuesta_correcta": "La función está diseñada específicamente para capturar la salida producida por el comando.",
+                "concepto_principal": "Captura de salida de procesos",
+                "error_comun_evaluado": "Confundir la captura de salida con la obtención de códigos de retorno.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "No devuelve únicamente el código de salida."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "No existe esa restricción en el documento."
+                    },
+                    "d": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "El documento indica que puede lanzar CalledProcessError."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Excepciones y manejo de errores",
+            "fragmento_origen": "Estructura try/except",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "En una estructura `try/except IOError`, si ninguna instrucción dentro del bloque `try` genera una excepción, ¿qué ocurre con el bloque `except`?",
+            "opciones": {
+                "a": "Se ejecuta igualmente al finalizar el bloque try.",
+                "b": "Se ejecuta solo si el bloque try contiene llamadas a archivos.",
+                "c": "Se omite y la ejecución continúa después del try/except."
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Si no hay excepción, la sección except se omite y el código continúa después del try/except.",
+                    "seccion": "Excepciones :contentReference[oaicite:4]{index=4}"
+                },
+                "razon_respuesta_correcta": "El bloque except solo actúa como manejador cuando realmente se produce la excepción indicada.",
+                "concepto_principal": "Flujo de ejecución en try/except",
+                "error_comun_evaluado": "Pensar que except forma parte del flujo normal del programa.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Except no se ejecuta automáticamente."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "La ejecución depende de la excepción, no del tipo de instrucciones."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "HTTP con urllib",
+            "fragmento_origen": "Procesamiento de URLs y contenido HTML",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "En la función `wget()` mostrada en el documento, ¿por qué se comprueba `ufile.info().get_content_type() == 'text/html'` antes de leer e imprimir el contenido?",
+            "opciones": {
+                "a": "Para asegurarse de que el recurso recuperado es contenido HTML antes de procesarlo como texto.",
+                "b": "Para convertir automáticamente cualquier recurso en HTML.",
+                "c": "Para obtener la URL base después de una redirección."
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La función lee e imprime el contenido únicamente cuando el tipo MIME es 'text/html'.",
+                    "seccion": "HTTP — urllib y urlparse :contentReference[oaicite:5]{index=5}"
+                },
+                "razon_respuesta_correcta": "La comprobación filtra el tipo de contenido para tratar como texto únicamente recursos HTML.",
+                "concepto_principal": "Validación del tipo MIME",
+                "error_comun_evaluado": "Confundir la verificación del contenido con operaciones de conversión o redirección.",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "La comprobación no transforma el contenido."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "La URL base se obtiene mediante geturl()."
+                    }
+                }
+            }
+        }
+    ]
+}

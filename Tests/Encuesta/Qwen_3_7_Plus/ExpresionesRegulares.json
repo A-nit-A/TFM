@@ -1,0 +1,213 @@
+{
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python (Python 3)",
+    "fuente": "Texto proporcionado",
+    "motivo_reduccion": "",
+    "distribucion_tematica": [
+      {"tema": "Búsqueda básica con re.search() y match.group()", "num_preguntas": 1},
+      {"tema": "Comportamiento codicioso (greedy) de + y *", "num_preguntas": 1},
+      {"tema": "findall() con grupos de extracción", "num_preguntas": 1},
+      {"tema": "Cadenas raw (r'...') en patrones", "num_preguntas": 1},
+      {"tema": "Opciones de re (DOTALL, MULTILINE, IGNORECASE)", "num_preguntas": 1}
+    ],
+    "distribucion_respuestas": {"a": 1, "b": 1, "c": 2, "d": 1},
+    "distribucion_dificultad": {"Media": 2, "Alta": 3}
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Búsqueda básica con re.search() y match.group()",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Al ejecutar `match = re.search(r'\\d\\d\\d', 'p123g')`, si la búsqueda tiene éxito, ¿qué devuelve la expresión `match.group()`?",
+      "opciones": {
+        "a": "La cadena completa 'p123g'",
+        "b": "Un valor booleano True",
+        "c": "El texto coincidente '123'"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "El documento establece que `re.search()` toma un patrón y una cadena, y si la búsqueda tiene éxito devuelve un objeto de coincidencia (match). A continuación indica que `match.group()` es el texto coincidente, y muestra el ejemplo: `match = re.search(r'\\d\\d\\d', 'p123g') # found, match.group() == \"123\"`.",
+        "razon_respuesta_correcta": "`re.search()` busca el patrón `\\d\\d\\d` (tres dígitos) dentro de la cadena 'p123g'. Encuentra '123' como texto coincidente, y `match.group()` devuelve exactamente ese texto, no la cadena completa ni un booleano.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Uso de re.search() y extracción del texto coincidente con match.group()",
+        "error_comun_evaluado": "Confundir el texto coincidente con la cadena completa o con el resultado booleano de la búsqueda",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde `match.group()` con la cadena original completa. re.search() no requiere que todo el patrón coincida con toda la cadena, solo busca el patrón dentro de ella."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Confunde el objeto match con un valor booleano. Aunque el objeto match se evalúa como verdadero en un if, `match.group()` devuelve el texto, no True."
+          }
+        },
+        "validacion_tecnica": {
+          "codigo_ejecutado_mentalmente": true,
+          "nivel_confianza": "alto",
+          "observaciones": ""
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Comportamiento codicioso (greedy) de + y *",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Dado el siguiente código:\n\n```python\nmatch = re.search(r'i+', 'piigiiii')\nprint(match.group())\n```\n\n¿Qué se imprime por pantalla?",
+      "opciones": {
+        "a": "'ii'",
+        "b": "'iiii'",
+        "c": "'i'",
+        "d": "'iii'"
+      },
+      "justificacion_4_opciones": "El comportamiento de re.search() combinado con el operador + codicioso admite cuatro interpretaciones erróneas naturales según cómo el estudiante entienda la regla 'leftmost & largest': detenerse en el primer carácter, tomar la secuencia más larga global, tomar la primera secuencia completa, o confundir el conteo de caracteres. Cada distractor refleja un modelo mental distinto sobre cómo funcionan los cuantificadores greedy.",
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "El documento establece dos reglas fundamentales: 'la búsqueda encuentra la coincidencia más a la izquierda para el patrón' y 'intenta consumir la mayor cantidad posible de la cadena; es decir, + y * van tan lejos como sea posible (se dice que + y * son codiciosos o greedy)'. Muestra el ejemplo exacto: `match = re.search(r'i+', 'piigiiii') # found, match.group() == \"ii\"`.",
+        "razon_respuesta_correcta": "En la cadena 'piigiiii', la primera secuencia de una o más 'i' comienza en el índice 1 y tiene dos caracteres ('ii'), seguida de una 'g'. re.search() se detiene en esta primera coincidencia (leftmost) y el operador + consume todas las 'i' contiguas posibles en esa posición (greedy), resultando en 'ii'. No llega a la segunda secuencia de cuatro 'i' porque la búsqueda ya tuvo éxito.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Regla 'leftmost & largest': primera coincidencia más a la izquierda con máxima extensión del cuantificador",
+        "error_comun_evaluado": "Asumir que + busca la secuencia más larga de toda la cadena o que re.search() devuelve todas las coincidencias",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume que + toma la secuencia más larga de toda la cadena ('iiii'), ignorando que re.search() se detiene en la primera coincidencia encontrada (leftmost), no en la más larga global."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Asume que + se comporta como si fuera opcional o toma solo un carácter, ignorando que el cuantificador + es greedy y consume todos los caracteres contiguos posibles."
+          },
+          "d": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Cuenta mal los caracteres de la primera secuencia de 'i' en 'piigiiii', asumiendo que hay tres en lugar de dos antes de la 'g'."
+          }
+        },
+        "validacion_tecnica": {
+          "codigo_ejecutado_mentalmente": true,
+          "nivel_confianza": "alto",
+          "observaciones": ""
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "findall() con grupos de extracción",
+      "dificultad": "Alta",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Dado el siguiente código:\n\n```python\nstr = 'purple alice@google.com, blah monkey bob@abc.com blah'\ntuples = re.findall(r'([\\w.-]+)@([\\w.-]+)', str)\n```\n\n¿Qué contiene la variable `tuples`?",
+      "opciones": {
+        "a": "['alice@google.com', 'bob@abc.com']",
+        "b": "[('alice', 'google.com'), ('bob', 'abc.com')]",
+        "c": "[['alice', 'google.com'], ['bob', 'abc.com']]",
+        "d": "{'alice': 'google.com', 'bob': 'abc.com'}"
+      },
+      "justificacion_4_opciones": "El método findall() con dos grupos de paréntesis admite cuatro interpretaciones erróneas naturales sobre la estructura de datos devuelta: lista de cadenas completas, lista de tuplas, lista de listas o diccionario. Cada distractor refleja una confusión real sobre cómo findall() combina los grupos de extracción con su comportamiento habitual de devolver listas.",
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "El documento establece explícitamente: 'Si el patrón incluye 2 o más grupos de paréntesis, entonces en lugar de devolver una lista de cadenas, findall() devuelve una lista de tuplas. Cada tupla representa una coincidencia del patrón, y dentro de la tupla se encuentran los datos de group(1), group(2), etc.' Muestra el ejemplo exacto: `tuples = re.findall(r'([\\w.-]+)@([\\w.-]+)', str)` que produce `[('alice', 'google.com'), ('bob', 'abc.com')]`.",
+        "razon_respuesta_correcta": "El patrón tiene dos grupos de paréntesis: `([\\w.-]+)` para el usuario y `([\\w.-]+)` para el host. findall() con múltiples grupos devuelve una lista de tuplas, donde cada tupla contiene los textos de group(1) y group(2) de cada coincidencia.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Comportamiento de findall() cuando el patrón incluye múltiples grupos de paréntesis",
+        "error_comun_evaluado": "Confundir la estructura de datos devuelta por findall() con grupos (tuplas) frente a sin grupos (cadenas)",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume que findall() siempre devuelve una lista de cadenas completas, ignorando que la presencia de grupos de paréntesis cambia el comportamiento a lista de tuplas con los contenidos de cada grupo."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Confunde tuplas con listas, asumiendo que findall() devuelve listas anidadas en lugar de tuplas. En Python, los paréntesis () crean tuplas, no listas."
+          },
+          "d": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Asume que findall() construye automáticamente un diccionario con los grupos, cuando en realidad findall() siempre devuelve listas (de cadenas o de tuplas), nunca diccionarios."
+          }
+        },
+        "validacion_tecnica": {
+          "codigo_ejecutado_mentalmente": true,
+          "nivel_confianza": "alto",
+          "observaciones": ""
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Cadenas raw (r'...') en patrones",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "¿Por qué se recomienda usar el prefijo `r` (raw string) al definir patrones de expresiones regulares en Python?",
+      "opciones": {
+        "a": "Porque acelera la ejecución del patrón al compilarlo previamente en bytecode",
+        "b": "Porque permite que el patrón coincida con barras invertidas literales presentes en el texto buscado",
+        "c": "Porque transmite las barras invertidas sin modificarlas, evitando conflictos con las secuencias de escape de Python",
+        "d": "Porque convierte automáticamente el patrón a minúsculas, facilitando la coincidencia insensible a mayúsculas"
+      },
+      "justificacion_4_opciones": "El uso de cadenas raw admite cuatro confusiones frecuentes del alumnado: confundir su propósito con optimización de rendimiento, con coincidencia de caracteres especiales en el texto, con conversión automática de casos, o con la transmisión literal de barras invertidas. Cada distractor refleja una creencia errónea habitual sobre qué problema resuelve realmente el prefijo r.",
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "El documento afirma explícitamente: 'La r al inicio de la cadena del patrón designa una cadena \"cruda\" (raw) de Python que transmite las barras invertidas sin modificarlas, lo cual es muy útil para las expresiones regulares'.",
+        "razon_respuesta_correcta": "Sin el prefijo r, Python interpretaría secuencias como \\d o \\w como secuencias de escape propias del lenguaje antes de pasarlas al motor de expresiones regulares. El prefijo r indica a Python que no procese las barras invertidas, transmitiéndolas literalmente al módulo re, que es quien las interpreta como metacaracteres de expresiones regulares.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Propósito de las cadenas raw (r'...') para evitar conflictos entre secuencias de escape de Python y de expresiones regulares",
+        "error_comun_evaluado": "Confundir el propósito del prefijo r con otras funcionalidades como optimización, coincidencia de caracteres especiales o conversión de casos",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume que r tiene un efecto sobre el rendimiento o la compilación del patrón, cuando en realidad solo afecta a cómo Python trata las barras invertidas en la cadena literal."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Confunde el tratamiento de la cadena del patrón con el texto buscado. El prefijo r afecta a cómo Python interpreta el patrón, no a qué caracteres puede coincidir en el texto."
+          },
+          "d": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "Confunde el prefijo r con la opción re.IGNORECASE. El prefijo r no tiene ningún efecto sobre mayúsculas o minúsculas; solo controla el tratamiento de barras invertidas."
+          }
+        },
+        "validacion_tecnica": {
+          "codigo_ejecutado_mentalmente": true,
+          "nivel_confianza": "alto",
+          "observaciones": ""
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "Opciones de re (DOTALL, MULTILINE, IGNORECASE)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Por defecto, el metacarácter `.` coincide con cualquier carácter excepto el salto de línea `\\n`. ¿Qué opción debe pasarse como argumento adicional a `re.search()` o `re.findall()` para que `.` también coincida con saltos de línea?",
+      "opciones": {
+        "a": "re.IGNORECASE",
+        "b": "re.MULTILINE",
+        "c": "re.DOTALL"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "El documento define las opciones disponibles y establece explícitamente: 'DOTALL -- permite que el punto (.) coincida con el salto de línea (normalmente coincide con cualquier cosa excepto con el salto de línea)'. Además advierte: 'Esto puede confundirte: crees que .* coincide con todo, pero por defecto no va más allá del final de una línea'.",
+        "razon_respuesta_correcta": "La opción re.DOTALL modifica el comportamiento del metacarácter . para que incluya los saltos de línea en su conjunto de caracteres coincidentes. Las otras opciones tienen propósitos diferentes: IGNORECASE afecta a mayúsculas/minúsculas y MULTILINE afecta al comportamiento de ^ y $.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Uso de la opción re.DOTALL para modificar el comportamiento del metacarácter .",
+        "error_comun_evaluado": "Confundir las diferentes opciones del módulo re y sus efectos específicos sobre los metacaracteres",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde re.IGNORECASE (que ignora diferencias entre mayúsculas y minúsculas) con re.DOTALL. Son opciones independientes que afectan a aspectos completamente diferentes de la coincidencia."
+          },
+          "b": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Confunde re.MULTILINE (que permite que ^ y $ coincidan con el inicio y final de cada línea) con re.DOTALL. MULTILINE no modifica el comportamiento de ., solo el de los anclas ^ y $."
+          }
+        },
+        "validacion_tecnica": {
+          "codigo_ejecutado_mentalmente": true,
+          "nivel_confianza": "alto",
+          "observaciones": ""
+        }
+      }
+    }
+  ]
+}

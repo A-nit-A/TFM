@@ -1,0 +1,265 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python (Python 3)",
+        "fuente": "Texto proporcionado",
+        "planificacion": {
+            "temas_identificados": [
+                {
+                    "tema": "Búsqueda con re.search(), objeto match, group(), raw strings",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Patrones básicos: \\w, \\d, \\s, punto, ^, $, escape",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Repetición: +, *, ?, comportamiento codicioso (leftmost & largest)",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Corchetes: conjuntos de caracteres, rangos, negación",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Grupos con paréntesis: group(1), group(2), extracción",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "findall(): todas las coincidencias, findall con archivos, findall con grupos (tuplas)",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Opciones: IGNORECASE, DOTALL, MULTILINE",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Greedy vs Non-Greedy: *?, +?, [^>]*",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Sustitución con re.sub()",
+                    "peso_relativo": "bajo"
+                }
+            ],
+            "asignacion_preguntas": [
+                {
+                    "pregunta_id": 1,
+                    "tema": "Patrones básicos (\\w no coincide con . ni -)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 2,
+                    "tema": "Repetición (comportamiento leftmost & largest)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "a"
+                },
+                {
+                    "pregunta_id": 3,
+                    "tema": "Grupos (extracción con group(2))",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "c"
+                },
+                {
+                    "pregunta_id": 4,
+                    "tema": "findall con grupos (lista de tuplas)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 5,
+                    "tema": "Corchetes y findall (conjuntos de caracteres)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "a"
+                }
+            ],
+            "temas_excluidos": "Se excluyen 'Opciones' (IGNORECASE, etc.), 'Greedy vs Non-Greedy' y 're.sub()' por su peso bajo y carácter opcional/avanzado. Los 5 temas seleccionados cubren el núcleo del documento.",
+            "verificacion": "Dificultad: Media=3, Alta=2 → cumple R7. Respuestas: a=2, b=2, c=1 → máx. 2 por letra (40%) → cumple R8."
+        },
+        "distribucion_tematica": [
+            {
+                "tema": "Patrones básicos (\\w y coincidencia parcial)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Repetición y comportamiento codicioso",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Grupos con paréntesis",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "findall con grupos (tuplas)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Corchetes y conjuntos de caracteres",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_dificultad": {
+            "Media": 3,
+            "Alta": 2
+        },
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 2,
+            "c": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Patrones básicos (\\w y coincidencia parcial)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nimport re\nmatch = re.search(r'\\w+@\\w+', 'correo: ana.lopez@mail.com fin')\nif match:\n    print(match.group())\n```",
+            "opciones": {
+                "a": "ana.lopez@mail.com",
+                "b": "lopez@mail",
+                "c": "ana@mail"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que \\w coincide con letras, dígitos o guion bajo [a-zA-Z0-9_], y muestra con el ejemplo del correo electrónico que \\w no coincide con '-' ni '.', por lo que el patrón r'\\w+@\\w+' no captura la dirección completa.",
+                "razon_respuesta_correcta": "\\w no coincide con el punto '.', así que \\w+ antes del @ solo captura 'lopez' (se detiene en el punto que separa 'ana' de 'lopez') y \\w+ después del @ captura 'mail' (se detiene en el punto antes de 'com'). El resultado es 'lopez@mail'.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Alcance limitado de \\w y su efecto en la coincidencia de patrones",
+                "error_comun_evaluado": "Asumir que \\w coincide con cualquier carácter visible, incluyendo puntos y guiones",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que \\w coincide con puntos y cualquier carácter del correo, como si fuera equivalente a '.' (punto regex). Es el error que el documento advierte explícitamente."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Supone que \\w+ captura desde 'ana' saltando el punto, como si el punto fuera invisible para la expresión regular en lugar de ser un límite de coincidencia."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Repetición y comportamiento codicioso (leftmost & largest)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nimport re\nmatch = re.search(r'a+', 'bbaabbaaaab')\nprint(match.group())\n```",
+            "opciones": {
+                "a": "aa",
+                "b": "aaaa",
+                "c": "aabbaaaa"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que la búsqueda encuentra la coincidencia más a la izquierda y que, dentro de esa coincidencia, + consume la mayor cantidad posible. Además, muestra un ejemplo donde re.search(r'i+', 'piigiiii') devuelve 'ii', no 'iiii', porque la primera aparición tiene prioridad.",
+                "razon_respuesta_correcta": "re.search() busca de izquierda a derecha. La primera secuencia de 'a' consecutivas comienza en la posición 2: 'aa'. Aunque más adelante aparece 'aaaa', search() se detiene en la primera coincidencia. Dentro de esa primera coincidencia, + captura las dos 'a' disponibles.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Prioridad de la coincidencia más a la izquierda sobre la más larga",
+                "error_comun_evaluado": "Creer que re.search() busca la coincidencia más larga en toda la cadena, ignorando la regla de prioridad de la posición",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que search() recorre toda la cadena y devuelve la coincidencia más larga globalmente ('aaaa'), ignorando la regla de que la posición más a la izquierda tiene prioridad."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Cree que a+ captura desde la primera 'a' hasta la última, incluyendo caracteres intermedios como 'b', confundiendo el significado de + (repetición del mismo patrón) con una captura de rango."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Grupos con paréntesis (extracción con group())",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nimport re\nmatch = re.search(r'(\\w+):(\\d+)', 'puerto:8080 activo')\nif match:\n    print(match.group(2))\n```",
+            "opciones": {
+                "a": "puerto:8080",
+                "b": "puerto",
+                "c": "8080"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que los paréntesis establecen grupos lógicos dentro del texto coincidente: match.group(1) corresponde al primer paréntesis izquierdo y match.group(2) al segundo. match.group() sin argumento devuelve el texto coincidente completo.",
+                "razon_respuesta_correcta": "El patrón tiene dos grupos: (\\w+) captura 'puerto' como group(1) y (\\d+) captura '8080' como group(2). Al llamar a match.group(2), se obtiene '8080'.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Extracción de subgrupos con group(n) en expresiones regulares",
+                "error_comun_evaluado": "Confundir los índices de grupo o confundir group(n) con group() sin argumento",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde group(2) con group() sin argumento, que devolvería la coincidencia completa 'puerto:8080'."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Confunde group(2) con group(1), devolviendo el contenido del primer paréntesis en lugar del segundo."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "findall con grupos (lista de tuplas)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nimport re\ntexto = 'clave:100 dato:200'\nresultado = re.findall(r'(\\w+):(\\d+)', texto)\nprint(resultado)\n```",
+            "opciones": {
+                "a": "['clave:100', 'dato:200']",
+                "b": "[('clave', '100'), ('dato', '200')]",
+                "c": "['clave', '100', 'dato', '200']"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento establece que si el patrón incluye 2 o más grupos de paréntesis, findall() devuelve una lista de tuplas en lugar de una lista de cadenas. Cada tupla contiene los datos de group(1), group(2), etc.",
+                "razon_respuesta_correcta": "El patrón tiene dos grupos de paréntesis: (\\w+) y (\\d+). Por tanto, findall() devuelve una lista de tuplas. Hay dos coincidencias, cada una con dos grupos, resultando [('clave', '100'), ('dato', '200')].",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Cambio de comportamiento de findall() cuando el patrón contiene grupos de paréntesis",
+                "error_comun_evaluado": "No saber que los paréntesis cambian el tipo de retorno de findall() (de lista de cadenas a lista de tuplas)",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que findall() devuelve las coincidencias completas como cadenas, que es el comportamiento cuando no hay paréntesis. Ignora que los grupos cambian el tipo de retorno."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Cree que findall() extrae todos los grupos y los aplana en una lista plana de cadenas, sin agruparlos en tuplas por cada coincidencia."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Corchetes y conjuntos de caracteres con findall",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nimport re\nresultado = re.findall(r'[A-Z]+', 'Hola Mundo Python')\nprint(resultado)\n```",
+            "opciones": {
+                "a": "['H', 'M', 'P']",
+                "b": "['Hola', 'Mundo', 'Python']",
+                "c": "['HMP']"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que los corchetes indican un conjunto de caracteres y que se puede usar un guion para indicar un rango, como [a-z] para letras minúsculas. Combinado con findall(), que devuelve todas las coincidencias como lista.",
+                "razon_respuesta_correcta": "[A-Z]+ coincide con una o más letras mayúsculas consecutivas. Cada palabra empieza con una sola mayúscula seguida de minúsculas (que no están en [A-Z]), así que cada coincidencia es una letra individual: 'H', 'M' y 'P'.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Uso de rangos en corchetes y su interacción con el cuantificador +",
+                "error_comun_evaluado": "Confundir el rango [A-Z] con una coincidencia de palabra completa, o creer que findall concatena los resultados",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que [A-Z]+ captura la palabra entera que comienza con mayúscula, como si el rango incluyera también las minúsculas que siguen."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Cree que findall() une todas las coincidencias en una sola cadena dentro de la lista, en lugar de devolver cada coincidencia como un elemento separado."
+                    }
+                }
+            }
+        }
+    ]
+}

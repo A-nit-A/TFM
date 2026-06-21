@@ -5,11 +5,31 @@
     "materia": "Programación en Python 3",
     "fuente": "Documento proporcionado: ExpresionesRegulares.md",
     "distribucion_tematica": [
-      {"tema": "Fundamentos de re (search, patrones básicos y cadenas crudas)", "peso": 20, "num_preguntas": 1},
-      {"tema": "Patrones de repetición (+, *, ?) y comportamiento codicioso", "peso": 20, "num_preguntas": 1},
-      {"tema": "Grupos de captura y extracción de subpatrones", "peso": 20, "num_preguntas": 1},
-      {"tema": "Función findall() y procesamiento de múltiples coincidencias", "peso": 20, "num_preguntas": 1},
-      {"tema": "Opciones/flags (IGNORECASE, DOTALL, MULTILINE)", "peso": 20, "num_preguntas": 1}
+      {
+        "tema": "Fundamentos de re (search, patrones básicos y cadenas crudas)",
+        "peso": 20,
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Patrones de repetición (+, *, ?) y comportamiento codicioso",
+        "peso": 20,
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Grupos de captura y extracción de subpatrones",
+        "peso": 20,
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Función findall() y procesamiento de múltiples coincidencias",
+        "peso": 20,
+        "num_preguntas": 1
+      },
+      {
+        "tema": "Opciones/flags (IGNORECASE, DOTALL, MULTILINE)",
+        "peso": 20,
+        "num_preguntas": 1
+      }
     ],
     "distribucion_respuestas": {
       "a": 2,
@@ -24,7 +44,7 @@
       "fragmento_origen": "Sección 'Ejemplos Básicos', ejemplo con patrón 'word:\\w\\w\\w' y cadena 'an example word:cat!!'",
       "dificultad": "Media",
       "nivel_bloom": "Aplicar",
-      "enunciado": "¿Qué imprime el siguiente código?\n```python\nimport re\nmatch = re.search(r'word:\\w\\w\\w', 'an example word\:cat!!')\nif match:\n    print('found', match.group())\nelse:\n    print('did not find')\n```",
+      "enunciado": "¿Qué imprime el siguiente código?\n```python\nimport re\nmatch = re.search(r'word:\\w\\w\\w', 'an example word:cat!!')\nif match:\n    print('found', match.group())\nelse:\n    print('did not find')\n```",
       "opciones": {
         "a": "found word:cat",
         "b": "found cat",
@@ -105,7 +125,7 @@
           "texto": "Los paréntesis ( ) en el patrón establecen grupos lógicos. match.group(1) es el texto del primer grupo, match.group(2) el del segundo, etc. match.group() sin argumentos devuelve todo el texto coincidente.",
           "seccion": "Extracción de Grupos"
         },
-        "razon_respuesta_correcta": "El patrón r'([\\w.-]+)@([\\w.-]+)' tiene dos grupos: el primero ([\w.-]+) captura 'alice-b' (antes del @), y el segundo ([\w.-]+) captura 'google.com' (después del @). match.group(2) devuelve el segundo grupo, es decir, 'google.com'.",
+        "razon_respuesta_correcta": "El patrón r'([\\w.-]+)@([\\w.-]+)' tiene dos grupos: el primero ([\\w.-]+) captura 'alice-b' (antes del @), y el segundo ([\\w.-]+) captura 'google.com' (después del @). match.group(2) devuelve el segundo grupo, es decir, 'google.com'.",
         "concepto_principal": "Extracción de subpatrones mediante grupos de captura con paréntesis",
         "error_comun_evaluado": "Confundir el índice de los grupos (empezando en 1) con el índice de la cadena o asumir que group(2) devuelve todo el match",
         "analisis_distractores": {

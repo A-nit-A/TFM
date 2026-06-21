@@ -1,0 +1,263 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python",
+        "fuente": "Texto proporcionado",
+        "planificacion": {
+            "temas_identificados": [
+                {
+                    "tema": "Creación, indexación y operaciones básicas de listas",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Asignación y referencias (mutabilidad)",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Bucle for/in e iteración",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Función range()",
+                    "peso_relativo": "medio"
+                },
+                {
+                    "tema": "Bucle while",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Métodos de lista",
+                    "peso_relativo": "alto"
+                },
+                {
+                    "tema": "Construcción de listas (build up)",
+                    "peso_relativo": "bajo"
+                },
+                {
+                    "tema": "Rebanadas de listas (slicing)",
+                    "peso_relativo": "medio"
+                }
+            ],
+            "asignacion_preguntas": [
+                {
+                    "pregunta_id": 1,
+                    "tema": "Métodos de lista (valor de retorno)",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "c"
+                },
+                {
+                    "pregunta_id": 2,
+                    "tema": "Bucle for/in e iteración",
+                    "dificultad": "Media",
+                    "respuesta_prevista": "a"
+                },
+                {
+                    "pregunta_id": 3,
+                    "tema": "Asignación y referencias (mutabilidad)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "b"
+                },
+                {
+                    "pregunta_id": 4,
+                    "tema": "Métodos de lista (combinación de operaciones)",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "a"
+                },
+                {
+                    "pregunta_id": 5,
+                    "tema": "Construcción de listas + slicing + range()",
+                    "dificultad": "Alta",
+                    "respuesta_prevista": "c"
+                }
+            ],
+            "temas_excluidos": "Se excluyen 'Bucle while' (peso bajo, sin contenido conceptual diferenciador respecto al for/in en el documento) y 'Construcción de listas' como tema aislado (se integra en Q5 junto con slicing y range). El operador 'in' como comprobación de pertenencia se omite por menor peso frente a los temas seleccionados.",
+            "verificacion": "Dificultad: 2 Media + 3 Alta (cumple R7: ≥2 Alta). Respuestas: a=2, b=1, c=2 (máx. 2 por letra, cumple R8). Sin solapamientos conceptuales entre preguntas."
+        },
+        "distribucion_tematica": [
+            {
+                "tema": "Métodos de lista",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Bucle for/in e iteración",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Asignación y referencias (mutabilidad)",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Construcción de listas + slicing + range()",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_dificultad": {
+            "Media": 2,
+            "Alta": 3
+        },
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 1,
+            "c": 2
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Métodos de lista (valor de retorno)",
+            "dificultad": "Media",
+            "nivel_bloom": "Comprender",
+            "enunciado": "¿Qué muestra por pantalla el siguiente código?\n\n```\nlista = [1, 2, 3]\nresultado = lista.append(4)\nprint(resultado)\n```",
+            "opciones": {
+                "a": "[1, 2, 3, 4]",
+                "b": "4",
+                "c": "None"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento indica explícitamente: 'Error común: no devuelve la nueva lista, sino que modifica la original' y muestra el ejemplo print(list.append(4)) con el comentario 'NO, does not work, append() returns None'.",
+                "razon_respuesta_correcta": "El método append() modifica la lista in situ y devuelve None. Al asignar su resultado a 'resultado' y luego imprimirlo, se obtiene None.",
+                "nivel_cognitivo_evaluado": "Comprender",
+                "concepto_principal": "Los métodos de lista que modifican in situ devuelven None",
+                "error_comun_evaluado": "Creer que append() devuelve la lista modificada o el elemento añadido",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que append() devuelve la lista modificada, confundiendo modificación in situ con retorno de valor."
+                    },
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Interpreta que append() devuelve el elemento que se ha añadido, como haría pop() con el elemento extraído."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Bucle for/in e iteración",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué valor imprime el siguiente código?\n\n```\npalabras = ['sol', 'mar', 'luz']\ntotal = 0\nfor p in palabras:\n    total += len(p)\nprint(total)\n```",
+            "opciones": {
+                "a": "9",
+                "b": "3",
+                "c": "solmarluz"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento muestra el patrón de acumulación con for/in (ejemplo de sum con squares) y el uso de len() para obtener la longitud.",
+                "razon_respuesta_correcta": "El bucle recorre las tres cadenas y acumula sus longitudes: len('sol')=3, len('mar')=3, len('luz')=3, total = 3+3+3 = 9.",
+                "nivel_cognitivo_evaluado": "Aplicar",
+                "concepto_principal": "Iteración con for/in y acumulación de valores con len()",
+                "error_comun_evaluado": "Confundir len() aplicada a cada elemento (longitud de cada cadena) con len() de la lista completa, o confundir acumulación numérica con concatenación de cadenas",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde len() de cada cadena con el número de elementos de la lista (len(palabras) = 3), sin ejecutar realmente el bucle."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Interpreta el operador += como concatenación de cadenas en lugar de suma numérica, ignorando que total es un entero inicializado a 0."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Asignación y referencias (mutabilidad)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué valor devuelve `len(x)` tras ejecutar el siguiente código?\n\n```\nx = [10, 20, 30]\ny = x\ny.append(40)\n```",
+            "opciones": {
+                "a": "3",
+                "b": "4",
+                "c": "Se produce un error de ejecución"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "evidencia_documental": "El documento explica que 'la asignación con un = en las listas no realiza una copia. En su lugar, la asignación hace que las dos variables apunten a la misma lista en memoria'.",
+                "razon_respuesta_correcta": "y = x no copia la lista: ambas variables apuntan al mismo objeto. Al ejecutar y.append(40), se modifica la lista compartida, que pasa a tener 4 elementos. Por tanto, len(x) devuelve 4.",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Semántica de referencia en la asignación de listas",
+                "error_comun_evaluado": "Creer que la asignación con = crea una copia independiente de la lista",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume que y = x crea una copia independiente, por lo que modificar y no afectaría a x y esta mantendría 3 elementos."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Supone que operar sobre y cuando x apunta a la misma lista genera algún conflicto o excepción, desconociendo que es un comportamiento válido en Python."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Métodos de lista (combinación de operaciones)",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Cuál es el contenido de `datos` tras ejecutar el siguiente código?\n\n```\ndatos = ['a', 'b', 'c', 'd']\ndatos.remove('b')\ndatos.insert(1, 'x')\ndatos.pop(0)\n```",
+            "opciones": {
+                "a": "['x', 'c', 'd']",
+                "b": "['a', 'x', 'c', 'd']",
+                "c": "['x', 'c']",
+                "d": "['a', 'x', 'd']"
+            },
+            "justificacion_4_opciones": "Cada método modifica la lista de forma distinta (búsqueda y eliminación, inserción por índice, extracción por índice). Las cuatro opciones representan errores reales al omitir o malinterpretar uno de los tres pasos, produciendo resultados diferenciados y plausibles.",
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "evidencia_documental": "El documento define remove(elem) como 'busca la primera aparición del elemento dado y lo elimina', insert(index, elem) como 'inserta el elemento en el índice dado, desplazando los elementos a la derecha', y pop(index) como 'elimina y devuelve el elemento en el índice dado'.",
+                "razon_respuesta_correcta": "Paso 1: remove('b') → ['a', 'c', 'd']. Paso 2: insert(1, 'x') → ['a', 'x', 'c', 'd']. Paso 3: pop(0) elimina 'a' → ['x', 'c', 'd'].",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Efecto acumulado de múltiples métodos de lista que modifican in situ",
+                "error_comun_evaluado": "No actualizar el estado intermedio de la lista tras cada operación y calcular los índices sobre la lista original",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Aplica correctamente remove e insert, pero omite el efecto de pop(0), quedándose con el resultado intermedio tras el segundo paso."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Ejecuta remove e insert correctamente y aplica pop(0), pero además elimina erróneamente 'd', posiblemente confundiendo pop(0) con una operación que también afecta al último elemento."
+                    },
+                    "d": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Omite el efecto de remove('b') y calcula insert y pop sobre la lista original, obteniendo un resultado donde 'b' desaparece solo indirectamente."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Construcción de listas + slicing + range()",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n\n```\nnums = []\nfor i in range(1, 4):\n    nums.append(i * 2)\nprint(nums[1:])\n```",
+            "opciones": {
+                "a": "[2, 4, 6]",
+                "b": "[2, 4]",
+                "c": "[4, 6]"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "evidencia_documental": "El documento describe el patrón de construcción de listas (lista vacía + append), range(a, b) como secuencia de a hasta b-1, y las rebanadas con índices base 0 y límite superior exclusivo.",
+                "razon_respuesta_correcta": "range(1, 4) genera 1, 2, 3. Tras el bucle, nums = [2, 4, 6]. La rebanada nums[1:] toma desde el índice 1 hasta el final: [4, 6].",
+                "nivel_cognitivo_evaluado": "Analizar",
+                "concepto_principal": "Integración de range(), append() para construir una lista y slicing para extraer una sublista",
+                "error_comun_evaluado": "No aplicar correctamente el índice de inicio del slice o confundir los valores generados por range()",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Construye correctamente la lista [2, 4, 6] pero ignora el efecto del slicing [1:], devolviendo la lista completa como si se imprimiera sin rebanada."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Interpreta range(1, 4) como si generase solo 1 y 2 (incluyendo el off-by-one al detenerse antes), obteniendo nums = [2, 4] y luego imprimiendo toda la lista o aplicando mal el slice."
+                    }
+                }
+            }
+        }
+    ]
+}

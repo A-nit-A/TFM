@@ -1,0 +1,204 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado sobre expresiones regulares en Python ",
+        "distribucion_tematica": [
+            {
+                "tema": "Búsqueda con re.search() y objetos match",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Patrones básicos y repetición",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Grupos de captura",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "findall() y extracción de datos",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 2,
+            "c": 1,
+            "d": 0
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Búsqueda con re.search() y objetos match",
+            "fragmento_origen": "Uso de re.search() y comprobación del resultado",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Al ejecutar `match = re.search(r'^b\\w+', 'foobar')`, ¿qué comportamiento se produce y por qué?",
+            "opciones": {
+                "a": "La búsqueda falla porque el patrón exige que la coincidencia comience al inicio de la cadena.",
+                "b": "La búsqueda devuelve `bar` porque encuentra la primera secuencia que empieza por `b`.",
+                "c": "La búsqueda devuelve `foobar` porque `\\w+` consume toda la cadena."
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El documento muestra que `re.search(r'^b\\w+', 'foobar')` no encuentra coincidencia porque `^` representa el inicio de la cadena.",
+                    "seccion": "Repetición y ejemplos con ^ "
+                },
+                "razon_respuesta_correcta": "El símbolo `^` obliga a que la coincidencia empiece al principio de la cadena. Como `foobar` comienza por `f`, no existe coincidencia.",
+                "concepto_principal": "Anclaje al inicio de cadena",
+                "error_comun_evaluado": "Suponer que `search()` ignora el anclaje `^` y busca en cualquier posición.",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Ignora el efecto de `^` y asume una búsqueda libre."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Confunde el alcance de `\\w+` con la posición inicial requerida."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Patrones básicos y repetición",
+            "fragmento_origen": "Comportamiento codicioso de `+`",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Según la regla de 'más a la izquierda y más grande', ¿qué devuelve `match.group()` al ejecutar `re.search(r'i+', 'piigiiii')`?",
+            "opciones": {
+                "a": "iiii",
+                "b": "ii",
+                "c": "iigiiii"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La búsqueda encuentra primero la coincidencia más a la izquierda y después extiende `+` tanto como puede dentro de esa coincidencia.",
+                    "seccion": "Más a la izquierda y más grande "
+                },
+                "razon_respuesta_correcta": "La primera secuencia de `i` encontrada es `ii`; la búsqueda no salta a la segunda secuencia más larga.",
+                "concepto_principal": "Codicia y prioridad de la coincidencia más a la izquierda",
+                "error_comun_evaluado": "Pensar que siempre se selecciona la secuencia global más larga.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Asume que el motor elige la secuencia de `i` más larga de toda la cadena."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Supone que la coincidencia puede atravesar caracteres que no cumplen el patrón."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Grupos de captura",
+            "fragmento_origen": "Extracción de usuario y host de un correo",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Si `str = 'purple alice-b@google.com monkey dishwasher'` y se ejecuta `re.search(r'([\\w.-]+)@([\\w.-]+)', str)`, ¿qué valor devuelve `match.group(2)`?",
+            "opciones": {
+                "a": "[alice-b@google.com](mailto:alice-b@google.com)",
+                "b": "alice-b",
+                "c": "google.com"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El segundo grupo captura la parte del host del correo electrónico.",
+                    "seccion": "Extracción de grupos "
+                },
+                "razon_respuesta_correcta": "El grupo 2 corresponde al patrón situado después de `@`, es decir, `google.com`.",
+                "concepto_principal": "Uso de grupos de captura",
+                "error_comun_evaluado": "Confundir la coincidencia completa con los grupos individuales.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Corresponde a `group()` completo, no a `group(2)`."
+                    },
+                    "b": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Corresponde al primer grupo capturado."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "findall() y extracción de datos",
+            "fragmento_origen": "findall() con grupos",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Al aplicar `re.findall(r'([\\w\\.-]+)@([\\w\\.-]+)', texto)` sobre un texto con varios correos electrónicos, ¿qué estructura devuelve la función?",
+            "opciones": {
+                "a": "Una lista de tuplas con los valores capturados por cada grupo.",
+                "b": "Una cadena con todas las coincidencias concatenadas.",
+                "c": "Un único objeto `match` correspondiente a la primera coincidencia."
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Cuando el patrón contiene dos o más grupos, `findall()` devuelve una lista de tuplas.",
+                    "seccion": "findall y grupos "
+                },
+                "razon_respuesta_correcta": "Cada tupla contiene los valores asociados a los grupos capturados en una coincidencia.",
+                "concepto_principal": "Salida de findall() con múltiples grupos",
+                "error_comun_evaluado": "Confundir `findall()` con `search()` o con una salida textual simple.",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "No devuelve una cadena agregada."
+                    },
+                    "c": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Describe el comportamiento de `search()`, no de `findall()`."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Patrones básicos y repetición",
+            "fragmento_origen": "Espacios opcionales mediante `\\s*`",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Por qué el patrón `\\d\\s*\\d\\s*\\d` consigue encontrar una coincidencia tanto en `xx1 2   3xx` como en `xx123xx`?",
+            "opciones": {
+                "a": "Porque `\\s*` exige exactamente un espacio entre cada dígito.",
+                "b": "Porque `\\s*` permite cero o más caracteres de espacio en blanco entre los dígitos.",
+                "c": "Porque `\\d` puede representar varios dígitos consecutivos."
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El documento indica que `\\s*` representa cero o más caracteres de espacio en blanco.",
+                    "seccion": "Ejemplos de repetición "
+                },
+                "razon_respuesta_correcta": "La presencia de cero o más espacios permite que los dígitos estén separados o aparezcan juntos.",
+                "concepto_principal": "Uso de `*` para repeticiones opcionales",
+                "error_comun_evaluado": "Confundir cero o más ocurrencias con una cantidad fija.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Describe una única ocurrencia, no una repetición opcional."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Confunde la función de `\\d` con la de los cuantificadores."
+                    }
+                }
+            }
+        }
+    ]
+}

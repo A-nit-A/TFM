@@ -1,0 +1,210 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado sobre listas en Python :contentReference[oaicite:0]{index=0}",
+        "distribucion_tematica": [
+            {
+                "tema": "Referencias y asignación de listas",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Bucles for/in y range()",
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Métodos de listas",
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Slices y modificación de listas",
+                "num_preguntas": 1
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 1,
+            "b": 2,
+            "c": 1,
+            "d": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Referencias y asignación de listas",
+            "fragmento_origen": "Asignación de listas con =",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Dado el código `colors = ['red', 'blue']; b = colors; b.append('green')`, ¿qué valor tendrá `colors` después de ejecutar la última línea?",
+            "opciones": {
+                "a": "['red', 'blue']",
+                "b": "['red', 'blue', 'green']",
+                "c": "[['red', 'blue'], 'green']"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La asignación con = no realiza una copia; ambas variables apuntan a la misma lista en memoria.",
+                    "seccion": "Asignación de listas :contentReference[oaicite:1]{index=1}"
+                },
+                "razon_respuesta_correcta": "Al compartir la misma referencia, modificar la lista mediante `b` también modifica la vista accesible desde `colors`.",
+                "concepto_principal": "Referencia frente a copia",
+                "error_comun_evaluado": "Suponer que la asignación crea automáticamente una copia independiente.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Asume incorrectamente que `b` es una copia independiente."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Interpreta erróneamente el comportamiento de `append()` como inserción de una lista anidada."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Bucles for/in y range()",
+            "fragmento_origen": "Definición de range(a, b)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Cuántas iteraciones realiza el bucle `for i in range(3, 8):`?",
+            "opciones": {
+                "a": "4",
+                "b": "5",
+                "c": "6"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "range(a, b) genera a, a+1, ... b-1.",
+                    "seccion": "Range :contentReference[oaicite:2]{index=2}"
+                },
+                "razon_respuesta_correcta": "Los valores generados son 3, 4, 5, 6 y 7, lo que produce cinco iteraciones.",
+                "concepto_principal": "Límite superior exclusivo en range()",
+                "error_comun_evaluado": "Incluir incorrectamente el valor final.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Omite uno de los valores válidos generados."
+                    },
+                    "c": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Incluye incorrectamente el valor 8 o interpreta el límite superior como inclusivo."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Métodos de listas",
+            "fragmento_origen": "append(), extend() e insert()",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Partiendo de `lista = ['a', 'b']`, ¿qué instrucción produce el resultado `['a', 'b', 'c', 'd']` siguiendo el comportamiento descrito en el documento?",
+            "opciones": {
+                "a": "lista.append(['c', 'd'])",
+                "b": "lista.insert(2, ['c', 'd'])",
+                "c": "lista.extend(['c', 'd'])",
+                "d": "lista.append('c', 'd')"
+            },
+            "justificacion_4_opciones": "Las cuatro opciones representan errores habituales y diferenciados al trabajar con métodos de listas: añadir una lista como elemento, insertar una lista en una posición, extender la lista con elementos individuales o utilizar una llamada inválida a append(). El cuarto distractor tiene valor discriminativo real.",
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "extend(list2) añade los elementos de list2 al final de la lista.",
+                    "seccion": "Métodos de lista :contentReference[oaicite:3]{index=3}"
+                },
+                "razon_respuesta_correcta": "extend() incorpora cada elemento de la segunda lista al final de la primera.",
+                "concepto_principal": "Diferencia entre append() y extend()",
+                "error_comun_evaluado": "Confundir añadir una lista con añadir sus elementos.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Añadiría una lista como único elemento al final."
+                    },
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Insertaría una lista completa en una posición concreta."
+                    },
+                    "d": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "append() acepta un único argumento."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Slices y modificación de listas",
+            "fragmento_origen": "Sustitución mediante slices",
+            "dificultad": "Alta",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "Tras ejecutar el código `lista = ['a', 'b', 'c', 'd']; lista[0:2] = 'z'`, ¿cuál es el contenido final de `lista`?",
+            "opciones": {
+                "a": "['z', 'c', 'd']",
+                "b": "['z']",
+                "c": "['a', 'b', 'z', 'c', 'd']"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "El documento muestra explícitamente que `list[0:2] = 'z'` reemplaza `['a', 'b']` por `['z']`.",
+                    "seccion": "Rebanadas de listas :contentReference[oaicite:4]{index=4}"
+                },
+                "razon_respuesta_correcta": "El slice inicial se sustituye por un único elemento, manteniéndose el resto de la lista.",
+                "concepto_principal": "Asignación sobre slices",
+                "error_comun_evaluado": "Interpretar el slice como inserción o sustitución total.",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Supone que toda la lista se reemplaza."
+                    },
+                    "c": {
+                        "tipo_error": "Error procedimental",
+                        "explicacion": "Confunde reemplazar con insertar."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Bucles for/in y range()",
+            "fragmento_origen": "Uso recomendado de for/in",
+            "dificultad": "Media",
+            "nivel_bloom": "Analizar",
+            "enunciado": "Según el documento, ¿qué ventaja aporta `for elemento in lista` frente a controlar manualmente los índices para recorrer todos los elementos de una lista?",
+            "opciones": {
+                "a": "Permite modificar libremente la lista durante la iteración.",
+                "b": "Evita construir la lista completa en memoria.",
+                "c": "Proporciona una forma directa de recorrer cada elemento de la colección."
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La construcción `for var in list` se presenta como una forma sencilla de recorrer cada elemento de una lista.",
+                    "seccion": "FOR e IN :contentReference[oaicite:5]{index=5}"
+                },
+                "razon_respuesta_correcta": "El documento destaca precisamente su simplicidad para iterar sobre todos los elementos.",
+                "concepto_principal": "Iteración directa con for/in",
+                "error_comun_evaluado": "Atribuir a for/in propiedades que pertenecen a otras construcciones.",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "El documento recomienda no añadir ni eliminar elementos durante la iteración."
+                    },
+                    "b": {
+                        "tipo_error": "Error de interpretación",
+                        "explicacion": "Esa característica se menciona en relación con xrange()/range(), no con for/in."
+                    }
+                }
+            }
+        }
+    ]
+}

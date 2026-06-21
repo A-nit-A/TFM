@@ -1,0 +1,191 @@
+{
+  "examen_metadatos": {
+    "num_preguntas": 5,
+    "nivel_educativo": "FP ciclo superior",
+    "materia": "Programación en Python (Python 3)",
+    "fuente": "Texto proporcionado",
+    "planificacion": {
+      "temas_identificados": [
+        { "tema": "Sistema de Archivos (os, os.path, shutil)", "peso_relativo": "alto" },
+        { "tema": "Ejecución de Procesos Externos (subprocess)", "peso_relativo": "medio" },
+        { "tema": "Excepciones (try/except)", "peso_relativo": "medio" },
+        { "tema": "HTTP (urllib y urlparse)", "peso_relativo": "medio" }
+      ],
+      "asignacion_preguntas": [
+        { "pregunta_id": 1, "tema": "Sistema de Archivos (os, os.path, shutil)", "dificultad": "Media", "respuesta_prevista": "b" },
+        { "pregunta_id": 2, "tema": "Sistema de Archivos (os, os.path, shutil)", "dificultad": "Alta", "respuesta_prevista": "c" },
+        { "pregunta_id": 3, "tema": "Ejecución de Procesos Externos (subprocess)", "dificultad": "Media", "respuesta_prevista": "a" },
+        { "pregunta_id": 4, "tema": "Excepciones (try/except)", "dificultad": "Alta", "respuesta_prevista": "a" },
+        { "pregunta_id": 5, "tema": "HTTP (urllib y urlparse)", "dificultad": "Media", "respuesta_prevista": "b" }
+      ],
+      "temas_excluidos": "No aplica. El documento contiene exactamente 4 temas, por debajo del umbral de 5.",
+      "verificacion": "Dificultad: 3 Media + 2 Alta (cumple R7, ≥2 Alta). Respuestas: a=2, b=2, c=1 (máximo 2 por letra, cumple R8)."
+    },
+    "distribucion_tematica": [
+      { "tema": "Sistema de Archivos (os, os.path, shutil)", "num_preguntas": 2 },
+      { "tema": "Ejecución de Procesos Externos (subprocess)", "num_preguntas": 1 },
+      { "tema": "Excepciones (try/except)", "num_preguntas": 1 },
+      { "tema": "HTTP (urllib y urlparse)", "num_preguntas": 1 }
+    ],
+    "distribucion_dificultad": { "Media": 3, "Alta": 2 },
+    "distribucion_respuestas": { "a": 2, "b": 2, "c": 1 }
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "tema": "Sistema de Archivos (os, os.path, shutil)",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "¿Qué devuelven, respectivamente, `os.path.dirname(\"/home/nick/foo/bar.html\")` y `os.path.basename(\"/home/nick/foo/bar.html\")`?",
+      "opciones": {
+        "a": "\"/home/nick/foo/bar.html\" y \"bar\"",
+        "b": "\"/home/nick/foo\" y \"bar.html\"",
+        "c": "\"foo\" y \"bar.html\""
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "El documento indica: 'os.path.dirname(path), os.path.basename(path) — a partir de dir/foo/bar.html, devuelve el nombre del directorio \"dir/foo\" y el nombre base \"bar.html\".'",
+        "razon_respuesta_correcta": "dirname extrae la ruta completa del directorio sin el nombre del archivo (\"/home/nick/foo\"), y basename extrae únicamente el nombre del archivo con su extensión (\"bar.html\").",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Funciones de descomposición de rutas en os.path",
+        "error_comun_evaluado": "Confundir qué parte de la ruta devuelve cada función, o creer que dirname solo devuelve el directorio inmediato sin la ruta completa.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Confunde dirname con la ruta completa y asume que basename elimina la extensión, devolviendo solo el nombre del archivo sin ella."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Interpreta dirname como si devolviera solo el directorio padre inmediato ('foo') en lugar de la ruta completa hasta ese directorio."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "tema": "Sistema de Archivos (os, os.path, shutil)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "Se desea copiar el archivo \"informe.pdf\" a la ruta \"backup/2024/junio/informe.pdf\", pero ninguno de los directorios intermedios existe todavía. ¿Qué secuencia de operaciones consigue el objetivo correctamente?",
+      "opciones": {
+        "a": "Llamar a `shutil.copy(\"informe.pdf\", \"backup/2024/junio/informe.pdf\")` directamente",
+        "b": "Llamar a `os.mkdir(\"backup/2024/junio\")` y después a `shutil.copy(\"informe.pdf\", \"backup/2024/junio/informe.pdf\")`",
+        "c": "Llamar a `os.makedirs(\"backup/2024/junio\")` y después a `shutil.copy(\"informe.pdf\", \"backup/2024/junio/informe.pdf\")`"
+      },
+      "respuesta_correcta": "c",
+      "justificacion": {
+        "evidencia_documental": "El documento establece que 'shutil.copy(source-path, dest-path) — copia un archivo (los directorios de la ruta de destino deben existir)' y que 'os.mkdir(dir_path) — crea un directorio, os.makedirs(dir_path) crea todos los directorios necesarios en esta ruta'.",
+        "razon_respuesta_correcta": "shutil.copy requiere que los directorios de destino ya existan. os.makedirs crea toda la jerarquía de directorios necesaria (backup, backup/2024, backup/2024/junio), a diferencia de os.mkdir que solo crea un único nivel.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Diferencia entre os.mkdir y os.makedirs y su relación con shutil.copy",
+        "error_comun_evaluado": "No distinguir entre mkdir (un solo nivel) y makedirs (jerarquía completa), o desconocer el requisito de shutil.copy sobre directorios preexistentes.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Ignora que shutil.copy exige que los directorios de destino existan previamente. Sin crearlos, la operación lanzará un error."
+          },
+          "b": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "os.mkdir solo crea un directorio de un nivel. Como 'backup' no existe, no puede crear 'backup/2024/junio' directamente y fallará con un error."
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "tema": "Ejecución de Procesos Externos (subprocess)",
+      "dificultad": "Media",
+      "nivel_bloom": "Comprender",
+      "enunciado": "¿Cuál es la diferencia principal entre `subprocess.check_output(cmd)` y `subprocess.call(cmd)`?",
+      "opciones": {
+        "a": "`check_output` captura y devuelve el texto de salida del comando, mientras que `call` vuelca la salida directamente y devuelve el código de error",
+        "b": "`check_output` ejecuta el comando de forma asíncrona, mientras que `call` lo ejecuta de forma síncrona esperando a que finalice",
+        "c": "`check_output` permite ejecutar múltiples comandos en cadena, mientras que `call` solo ejecuta un único comando"
+      },
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "El documento indica que check_output 'ejecuta el comando, espera a que finalice y devuelve su texto de salida' y que call 'ejecuta el comando, vuelca su salida en tu salida y devuelve su código de error. Esto es útil si deseas ejecutar el comando pero no necesitas capturar su salida en tus estructuras de datos de Python'.",
+        "razon_respuesta_correcta": "La distinción clave es que check_output captura la salida como dato utilizable en Python, mientras que call solo deja que la salida se imprima y devuelve el código de salida numérico.",
+        "nivel_cognitivo_evaluado": "Comprender",
+        "concepto_principal": "Funciones del módulo subprocess para ejecutar comandos externos",
+        "error_comun_evaluado": "Confundir el modo de ejecución (síncrono/asíncrono) con la diferencia real, que es captura vs volcado de la salida.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Ambas funciones son síncronas y esperan a que el comando finalice. La confusión con ejecución asíncrona proviene de asociar 'captura de salida' con concurrencia."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Ninguna de las dos funciones está diseñada específicamente para encadenar comandos. La diferencia no radica en el número de comandos sino en cómo se gestiona la salida."
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "tema": "Excepciones (try/except)",
+      "dificultad": "Alta",
+      "nivel_bloom": "Analizar",
+      "enunciado": "¿Qué salida produce el siguiente código si el archivo \"datos.txt\" no existe?\n\n```\ntry:\n    f = open(\"datos.txt\", \"rb\")\n    data = f.read()\n    print(\"Lectura correcta\")\n    f.close()\nexcept IOError:\n    print(\"Error de lectura\")\nprint(\"Fin del programa\")\n```",
+      "opciones": {
+        "a": "\"Error de lectura\" seguido de \"Fin del programa\"",
+        "b": "\"Lectura correcta\" seguido de \"Fin del programa\"",
+        "c": "Solo \"Error de lectura\", y el programa se detiene",
+        "d": "El programa se detiene con un mensaje de excepción sin imprimir nada"
+      },
+      "justificacion_4_opciones": "Los cuatro escenarios corresponden a confusiones reales sobre el flujo try/except: si se ejecuta el bloque try completo o se salta al except, si la ejecución continúa tras el except, y si el except realmente captura la excepción. Cada opción representa un modelo mental diferente del estudiante.",
+      "respuesta_correcta": "a",
+      "justificacion": {
+        "evidencia_documental": "El documento indica que 'la sección try: incluye el código que podría lanzar una excepción. La sección except: contiene el código a ejecutar si ocurre una excepción' y que 'en cualquier caso, el código continúa con la línea después del try/except'.",
+        "razon_respuesta_correcta": "Al no existir el archivo, open() lanza IOError. El control salta directamente al except, imprimiendo 'Error de lectura'. Las líneas posteriores a open() dentro del try no se ejecutan. Tras el except, la ejecución continúa normalmente con 'Fin del programa'.",
+        "nivel_cognitivo_evaluado": "Analizar",
+        "concepto_principal": "Flujo de ejecución en estructuras try/except y continuación del programa",
+        "error_comun_evaluado": "No comprender que la ejecución salta directamente al except al producirse la excepción (sin ejecutar el resto del try) y que el programa continúa después del bloque try/except.",
+        "analisis_distractores": {
+          "b": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Asume que el bloque try se ejecuta por completo a pesar de la excepción, sin comprender que open() interrumpe el flujo al fallar."
+          },
+          "c": {
+            "tipo_error": "Error de interpretación",
+            "explicacion": "Entiende correctamente el salto al except, pero cree erróneamente que la excepción detiene el programa por completo después del bloque except."
+          },
+          "d": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "Desconoce que except IOError captura la excepción generada por open(). Cree que el programa termina como si no existiera manejo de errores."
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "tema": "HTTP (urllib y urlparse)",
+      "dificultad": "Media",
+      "nivel_bloom": "Aplicar",
+      "enunciado": "Se necesita descargar el contenido de una URL y guardarlo directamente en un archivo local llamado \"pagina.html\". ¿Qué función es la más adecuada para hacerlo en una sola llamada?",
+      "opciones": {
+        "a": "`urllib.request.urlopen(url)` pasando el nombre de archivo como segundo argumento",
+        "b": "`urllib.request.urlretrieve(url, \"pagina.html\")`",
+        "c": "`urllib.parse.urljoin(url, \"pagina.html\")`"
+      },
+      "respuesta_correcta": "b",
+      "justificacion": {
+        "evidencia_documental": "El documento establece: 'urllib.request.urlretrieve(url, filename) — descarga los datos de la URL en la ruta de archivo especificada.'",
+        "razon_respuesta_correcta": "urlretrieve está diseñada específicamente para descargar el contenido de una URL y almacenarlo en un archivo local, aceptando la URL y la ruta de destino como argumentos.",
+        "nivel_cognitivo_evaluado": "Aplicar",
+        "concepto_principal": "Funciones de descarga del módulo urllib.request",
+        "error_comun_evaluado": "Confundir urlopen (que devuelve un objeto tipo archivo para leer en memoria) con urlretrieve (que guarda directamente a disco), o confundir urljoin (que combina URLs) con una función de descarga.",
+        "analisis_distractores": {
+          "a": {
+            "tipo_error": "Error procedimental",
+            "explicacion": "urlopen devuelve un objeto tipo archivo para leer el contenido en memoria, no acepta un nombre de archivo como segundo argumento para guardar automáticamente en disco."
+          },
+          "c": {
+            "tipo_error": "Error conceptual",
+            "explicacion": "urljoin combina una URL base con una URL relativa para formar una URL completa. No descarga ningún contenido ni interactúa con el sistema de archivos."
+          }
+        }
+      }
+    }
+  ]
+}

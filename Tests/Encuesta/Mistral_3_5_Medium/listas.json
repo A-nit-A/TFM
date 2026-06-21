@@ -1,0 +1,212 @@
+{
+    "examen_metadatos": {
+        "num_preguntas": 5,
+        "nivel_educativo": "FP ciclo superior",
+        "materia": "Programación en Python 3",
+        "fuente": "Documento proporcionado: Listas.md",
+        "distribucion_tematica": [
+            {
+                "tema": "Métodos de lista (append, extend, pop, etc.)",
+                "peso": 30,
+                "num_preguntas": 2
+            },
+            {
+                "tema": "Iteración y bucles (for/in, range)",
+                "peso": 20,
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Slicing y modificación de listas",
+                "peso": 20,
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Asignación y referencia de listas",
+                "peso": 20,
+                "num_preguntas": 1
+            },
+            {
+                "tema": "Construcción y operaciones básicas",
+                "peso": 10,
+                "num_preguntas": 0
+            }
+        ],
+        "distribucion_respuestas": {
+            "a": 2,
+            "b": 2,
+            "c": 1
+        }
+    },
+    "preguntas": [
+        {
+            "id": 1,
+            "tema": "Comportamiento de métodos mutables (append)",
+            "fragmento_origen": "Sección 'Métodos de lista (List Methods)', párrafo: 'Error común: ten en cuenta que los métodos anteriores no *devuelven* la lista modificada, simplemente modifican la lista original.' y ejemplo con list.append(4)",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nlst = [1, 2, 3]\nprint(lst.append(4))\n```",
+            "opciones": {
+                "a": "None",
+                "b": "[1, 2, 3, 4]",
+                "c": "4"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "Error común: ten en cuenta que los métodos anteriores no *devuelven* la lista modificada, simplemente modifican la lista original. list.append(elem) — añade un único elemento al final de la lista. Error común: no devuelve la nueva lista, sino que modifica la original.",
+                    "seccion": "Métodos de lista (List Methods)"
+                },
+                "razon_respuesta_correcta": "El método append() modifica la lista original añadiendo el elemento al final, pero **devuelve None**. Por lo tanto, print(lst.append(4)) imprime None.",
+                "concepto_principal": "Métodos mutables de lista devuelven None (modifican in situ)",
+                "error_comun_evaluado": "Asumir que los métodos de lista como append() devuelven la lista modificada en lugar de None",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde el efecto del método (modifica lst a [1,2,3,4]) con su valor de retorno (None). Asume que print() muestra el estado de lst después de la operación."
+                    },
+                    "c": {
+                        "tipo_error": "Error de valor de retorno",
+                        "explicacion": "Asume que append() devuelve el elemento añadido (4) en lugar de None."
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "tema": "Diferencia entre append() y extend()",
+            "fragmento_origen": "Sección 'Métodos de lista (List Methods)', ejemplos de append() y extend()",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué resultado produce el siguiente código?\n```python\nlst = [1, 2]\nlst.append([3, 4])\nprint(lst)\n```",
+            "opciones": {
+                "a": "[1, 2, 3, 4]",
+                "b": "[1, 2, [3, 4]]",
+                "c": "[[1, 2], [3, 4]]"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "list.append(elem) — añade un único elemento al final de la lista. list.extend(list2) — añade los elementos de list2 al final de la lista.",
+                    "seccion": "Métodos de lista (List Methods)"
+                },
+                "razon_respuesta_correcta": "append() añade su argumento como un **único elemento** al final de la lista. Como el argumento es [3, 4] (una lista), este se añade como un solo elemento, resultando en [1, 2, [3, 4]].",
+                "concepto_principal": "Diferencia entre añadir un elemento (append) y añadir los elementos de otra lista (extend)",
+                "error_comun_evaluado": "Confundir append() con extend() y asumir que los elementos de la lista argumentada se añaden individualmente",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error conceptual",
+                        "explicacion": "Confunde append([3,4]) con extend([3,4]), que sí añadiría los elementos 3 y 4 individualmente, resultando en [1,2,3,4]."
+                    },
+                    "c": {
+                        "tipo_error": "Error de operación",
+                        "explicacion": "Asume que append() concatena las dos listas ([1,2] y [3,4]) como un nuevo nivel de anidamiento, lo cual no es su comportamiento."
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "tema": "Iteración con for/in y suma de elementos",
+            "fragmento_origen": "Sección 'FOR e IN', ejemplo con squares = [1, 4, 9, 16] y suma de elementos",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nsquares = [1, 4, 9, 16]\ntotal = 0\nfor num in squares:\n    total += num\nprint(total)\n```",
+            "opciones": {
+                "a": "0",
+                "b": "14",
+                "c": "30"
+            },
+            "respuesta_correcta": "c",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La construcción for num in squares: es una forma sencilla de recorrer cada elemento de una lista. squares = [1, 4, 9, 16]; sum = 0; for num in squares: sum += num; print(sum) ## 30",
+                    "seccion": "FOR e IN"
+                },
+                "razon_respuesta_correcta": "El bucle itera sobre cada elemento de squares: 1, 4, 9 y 16. La suma acumulada es 1 + 4 + 9 + 16 = 30.",
+                "concepto_principal": "Iteración sobre listas con for/in y acumulación de valores",
+                "error_comun_evaluado": "Error aritmético al sumar los elementos o no comprender que el bucle recorre todos los elementos",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de inicialización",
+                        "explicacion": "Olvida que el bucle modifica la variable total, asumiendo que el valor inicial (0) no cambia."
+                    },
+                    "b": {
+                        "tipo_error": "Error de cálculo",
+                        "explicacion": "Suma incorrectamente solo algunos elementos (ej: 1 + 4 + 9 = 14), omitiendo el último elemento (16)."
+                    }
+                }
+            }
+        },
+        {
+            "id": 4,
+            "tema": "Modificación de listas mediante slicing",
+            "fragmento_origen": "Sección 'Rebanadas de listas (List Slices)', ejemplo: list[0:2] = 'z'",
+            "dificultad": "Alta",
+            "nivel_bloom": "Analizar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\nlst = ['a', 'b', 'c', 'd']\nlst[0:2] = 'z'\nprint(lst)\n```",
+            "opciones": {
+                "a": "['z', 'c', 'd']",
+                "b": "['z', 'b', 'c', 'd']",
+                "c": "['z', 'a', 'b', 'c', 'd']"
+            },
+            "respuesta_correcta": "a",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "list[0:2] = 'z'    ## replace ['a', 'b'] with ['z']; print(list)         ## ['z', 'c', 'd']",
+                    "seccion": "Rebanadas de listas (List Slices)"
+                },
+                "razon_respuesta_correcta": "El slicing lst[0:2] selecciona los elementos en los índices 0 y 1 ('a' y 'b'). Asignar 'z' a este slice reemplaza esos dos elementos con la cadena 'z', que se convierte en un único elemento en la lista. El resultado es ['z', 'c', 'd'].",
+                "concepto_principal": "Asignación mediante slicing y conversión de tipos implícita",
+                "error_comun_evaluado": "No comprender que asignar una cadena a un slice de lista reemplaza los elementos seleccionados con los caracteres de la cadena como elementos individuales",
+                "analisis_distractores": {
+                    "b": {
+                        "tipo_error": "Error de reemplazo",
+                        "explicacion": "Asume que 'z' reemplaza solo el primer elemento del slice (índice 0), dejando 'b' en el índice 1, en lugar de reemplazar todo el slice [0:2]."
+                    },
+                    "c": {
+                        "tipo_error": "Error de inserción",
+                        "explicacion": "Interpreta la asignación como una inserción de 'z' al inicio de la lista, desplazando los elementos existentes, en lugar de un reemplazo."
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "tema": "Asignación y referencia de listas (alias)",
+            "fragmento_origen": "Sección inicial: 'La asignación con un = en las listas no realiza una copia. En su lugar, la asignación hace que las dos variables apunten a la misma lista en memoria.'",
+            "dificultad": "Media",
+            "nivel_bloom": "Aplicar",
+            "enunciado": "¿Qué imprime el siguiente código?\n```python\ncolors = ['red', 'blue', 'green']\nb = colors\nb.append('yellow')\nprint(colors)\n```",
+            "opciones": {
+                "a": "['red', 'blue', 'green']",
+                "b": "['red', 'blue', 'green', 'yellow']",
+                "c": "['yellow']"
+            },
+            "respuesta_correcta": "b",
+            "justificacion": {
+                "confianza_documental": "Alta",
+                "evidencia_documental": {
+                    "texto": "La asignación con un = en las listas no realiza una copia. En su lugar, la asignación hace que las dos variables apunten a la misma lista en memoria. b = colors   ## Does not copy the list",
+                    "seccion": "Introducción a listas"
+                },
+                "razon_respuesta_correcta": "La asignación b = colors hace que ambas variables (colors y b) apunten a la **misma lista en memoria**. Por lo tanto, modificar b (con b.append('yellow')) también modifica colors, resultando en ['red', 'blue', 'green', 'yellow'].",
+                "concepto_principal": "Asignación de listas por referencia (no por copia)",
+                "error_comun_evaluado": "Asumir que la asignación de listas crea una copia independiente en lugar de un alias a la misma lista",
+                "analisis_distractores": {
+                    "a": {
+                        "tipo_error": "Error de referencia vs copia",
+                        "explicacion": "Asume que b = colors crea una copia independiente, por lo que modificar b no afecta a colors."
+                    },
+                    "c": {
+                        "tipo_error": "Error de comprensión",
+                        "explicacion": "Interpreta incorrectamente que b.append('yellow') reemplaza todo el contenido de la lista original con ['yellow']."
+                    }
+                }
+            }
+        }
+    ]
+}
